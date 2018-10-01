@@ -11,7 +11,7 @@ $factory->define(App\Icon::class, function (Faker $faker) {
 
   return [
     'name' => $faker->word(),
-    'content' => base64_encode($faker->imageGenerator(null, 640, 480, $formats[array_rand($formats)])),
+    'content' => base64_encode($faker->unique()->imageGenerator(null, 640, 480, $formats[array_rand($formats)])),
     'format' => $formats[array_rand($formats)]
   ];
 });
