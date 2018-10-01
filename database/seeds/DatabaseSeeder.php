@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
 			'roles',
 			'users',
 			'user_actions',
+			'icons',
 		];
 
 		$this->command->info('Truncating existing tables');
@@ -32,5 +33,6 @@ class DatabaseSeeder extends Seeder
 
 		$this->call(UserSeeder::class);
 		$this->call(UserActionSeeder::class);
+		$this->call(IconSeeder::class);
 	}
 }
