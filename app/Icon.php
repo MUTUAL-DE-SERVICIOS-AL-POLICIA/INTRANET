@@ -8,6 +8,10 @@ class Icon extends Model
 {
   public $timestamps = true;
   public $guarded = ['id'];
-  protected $dates = ['deleted_at'];
   protected $fillable = ['name', 'content', 'format'];
+
+  public function services()
+  {
+    return $this->hasMany(Service::class);
+  }
 }

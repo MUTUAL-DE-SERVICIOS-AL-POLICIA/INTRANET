@@ -5,6 +5,7 @@ Route::group([
 	'prefix' => 'v1',
 ], function () {
 	// Login
+	Route::get('group', 'Api\V1\GroupController@index')->name('group_list');
 	Route::post('auth', 'Api\V1\AuthController@store')->name('login');
 	Route::group([
 		'middleware' => 'jwt.auth'

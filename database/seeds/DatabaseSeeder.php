@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
 			'user_actions',
 			'icons',
 			'groups',
+			'services',
 		];
 
 		$this->command->info('Truncating existing tables');
@@ -36,5 +37,6 @@ class DatabaseSeeder extends Seeder
 		$this->call(UserActionSeeder::class);
 		$this->call(IconSeeder::class);
 		$this->call(GroupSeeder::class);
+		$this->call(ServiceSeeder::class);
 	}
 }
