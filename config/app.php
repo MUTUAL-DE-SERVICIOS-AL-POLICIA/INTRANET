@@ -172,15 +172,6 @@ return [
 
 		// CORS
 		Barryvdh\Cors\ServiceProvider::class,
-
-		// Snappy
-		Barryvdh\Snappy\ServiceProvider::class,
-
-		// Barcode
-		Milon\Barcode\BarcodeServiceProvider::class,
-
-		// Excel
-		Maatwebsite\Excel\ExcelServiceProvider::class,
 	],
 
 	/*
@@ -237,21 +228,10 @@ return [
 		// ACL Entrust
 		'Laratrust' => Laratrust\LaratrustFacade::class,
 
-		// Snappy
-		'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-		'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
-
 		// Util
 		'Util' => App\Helpers\Util::class,
 
 		// Carbon
 		'Carbon' => \Carbon\Carbon::class,
-
-		// Barcode
-		'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
-		'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
-
-		// Excel
-		'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 	],
 ];

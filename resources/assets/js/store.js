@@ -21,7 +21,7 @@ export default {
     }
   },
   mutations: {
-    logout(state) {
+    'logout': function (state) {
       localStorage.removeItem('user')
       localStorage.removeItem('token')
       localStorage.removeItem('token_type')
