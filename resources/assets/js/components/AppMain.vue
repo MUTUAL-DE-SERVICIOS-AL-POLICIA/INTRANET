@@ -1,5 +1,22 @@
 <template>
   <v-app>
+    <v-toolbar color="indigo" dark fixed app>      
+      <v-toolbar-title>MUSERPOL</v-toolbar-title>
+      <v-divider
+          class="mx-2"
+          inset
+          vertical
+        ></v-divider>
+      <v-spacer></v-spacer>      
+      <v-toolbar-title>MUSERPOL</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-divider
+          class="mx-2"
+          inset
+          vertical
+        ></v-divider>
+      <v-toolbar-title>MUSERPOL</v-toolbar-title>
+    </v-toolbar>
     <v-content>
       <v-slide-x-transition>
         <router-view></router-view>
