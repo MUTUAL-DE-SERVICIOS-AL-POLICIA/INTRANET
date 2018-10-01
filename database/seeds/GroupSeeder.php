@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class IconSeeder extends Seeder
+class GroupSeeder extends Seeder
 {
   /**
    * Run the database seeds.
@@ -11,6 +11,6 @@ class IconSeeder extends Seeder
    */
   public function run()
   {
-    factory(App\Icon::class, 12)->create();
+    factory(App\Group::class, 3)->create();
   }
 }
