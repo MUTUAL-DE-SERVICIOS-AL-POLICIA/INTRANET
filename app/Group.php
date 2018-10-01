@@ -9,5 +9,5 @@ class Group extends Model
   public $timestamps = true;
   public $guarded = ['id'];
   protected $dates = ['deleted_at'];
-  protected $fillable = ['shortened', 'display_name', 'color'];
+  protected $fillable = ['shortened', 'name', 'color'];
 }

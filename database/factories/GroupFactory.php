@@ -8,7 +8,7 @@ $factory->define(App\Group::class, function (Faker $faker) {
 
   return [
     'shortened' => $faker->word(),
-    'display_name' => $faker->sentence(),
+    'name' => $faker->sentence(),
     'color' => $faker->hexcolor(),
   ];
 });
