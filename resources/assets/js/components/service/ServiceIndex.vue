@@ -1,22 +1,5 @@
 <template>
 <v-app id="inspire">
-    <v-toolbar color="indigo" dark fixed app>      
-      <v-toolbar-title>MUSERPOL</v-toolbar-title>
-      <v-divider
-          class="mx-2"
-          inset
-          vertical
-        ></v-divider>
-      <v-spacer></v-spacer>      
-      <v-toolbar-title>MUSERPOL</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-divider
-          class="mx-2"
-          inset
-          vertical
-        ></v-divider>
-      <v-toolbar-title>MUSERPOL</v-toolbar-title>
-    </v-toolbar>
     <v-content>
 	    <v-container fluid fill-height>
         <v-layout row wrap align-center>
@@ -142,10 +125,7 @@
           </v-flex>
         </v-layout>
       </v-container>
-    </v-content>
-    <v-footer color="indigo" app inset>
-      <span class="white--text">&copy; 2017</span>
-    </v-footer>
+    </v-content>    
   </v-app>
 </template>
 
