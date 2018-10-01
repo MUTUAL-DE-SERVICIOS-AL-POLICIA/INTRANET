@@ -9,4 +9,9 @@ class Icon extends Model
   public $timestamps = true;
   public $guarded = ['id'];
   protected $fillable = ['name', 'content', 'format'];
+
+  public function services()
+  {
+    return $this->hasMany(Service::class);
+  }
 }
