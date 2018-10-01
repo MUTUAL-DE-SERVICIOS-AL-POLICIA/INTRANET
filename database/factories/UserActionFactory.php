@@ -7,7 +7,6 @@ $factory->define(App\UserAction::class, function (Faker $faker) {
 	$methods = ['POST', 'PUT', 'PATCH', 'DELETE'];
 	$routes = Route::getRoutes();
 	$paths = array();
-	$employees = App\Employee::get()->all();
 
 	foreach ($routes as $route) {
 		$paths[] = $route->uri();
@@ -17,6 +16,6 @@ $factory->define(App\UserAction::class, function (Faker $faker) {
 		'user_id' => $users[array_rand($users)]->id,
 		'method' => $methods[array_rand($methods)],
 		'path' => $paths[array_rand($paths)],
-		'data' => json_encode($employees[array_rand($employees)]),
+		'data' => json_encode([]),
 	];
 });
