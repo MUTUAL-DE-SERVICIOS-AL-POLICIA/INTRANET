@@ -27,7 +27,7 @@
 								<img :src="service.icon.content" :alt="service.icon.name">
 							</v-avatar>
 						</v-img>
-						<v-card-text>{{ service.name }}</v-card-text>
+						<v-card-text class="title font-weight-regular">{{ service.name }}</v-card-text>
 					</v-card>
 				</v-flex>
 			</v-layout>
