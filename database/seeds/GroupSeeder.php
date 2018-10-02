@@ -11,6 +11,6 @@ class GroupSeeder extends Seeder
    */
   public function run()
   {
-    factory(App\Group::class, 3)->create();
+    factory(App\Group::class, 6)->create();
   }
 }

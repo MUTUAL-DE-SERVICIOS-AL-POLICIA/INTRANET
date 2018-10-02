@@ -11,6 +11,6 @@ class IconSeeder extends Seeder
    */
   public function run()
   {
-    factory(App\Icon::class, 12)->create();
+    factory(App\Icon::class, 40)->create();
   }
 }
