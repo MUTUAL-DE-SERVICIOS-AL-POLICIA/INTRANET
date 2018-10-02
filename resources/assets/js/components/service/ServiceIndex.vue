@@ -31,6 +31,7 @@
                   <v-avatar
                     :size="80"
                     :tile="false"
+                    @contextmenu="show($event, service.hrefManual)"
                   >
                     <img :src="service.icon.content" :alt="service.icon.name">
                   </v-avatar>
@@ -43,6 +44,23 @@
 				</v-flex>
 			</v-layout>
 		</v-container>
+    <v-menu
+      v-model="showMenu"
+      :position-x="x"
+      :position-y="y"
+      absolute
+      offset-y
+    >
+      <v-list>
+        <v-list-tile
+          v-for="(item, index) in rightClickMenu"
+          :key="index"
+          @click="openManual(item.option)"
+        >
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
 	</v-container>
 </template>
 
@@ -51,10 +69,15 @@ export default {
   name: "ServiceIndex",
   data() {
     return {
+      showMenu: false,
+      x: 0,
+      y: 0,
+      hrefManual: "",
       groups: [],
       services: [],
       selection: [],
-      select: { id: 0, name: "APLICACIONES", shortened: "VER TODO" }
+      select: { id: 0, name: "APLICACIONES", shortened: "VER TODO" },
+      rightClickMenu: [{ option: 0, title: "Ver Manual" }]
     };
   },
   mounted() {
@@ -94,6 +117,25 @@ export default {
     },
     openLink(url) {
       window.open(url);
+    },
+    show(e, url) {
+      if (url != null) {
+        this.hrefManual = url;
+        e.preventDefault();
+        this.showMenu = false;
+        this.x = e.clientX;
+        this.y = e.clientY;
+        this.$nextTick(() => {
+          this.showMenu = true;
+        });
+      }
+    },
+    openManual(option) {
+      switch (option) {
+        case 0:
+          window.open(this.hrefManual);
+          break;
+      }
     }
   }
 };
