@@ -18,17 +18,28 @@
 		<v-container grid-list-md text-xs-center>
 			<v-layout row wrap>
 				<v-flex v-for="service in services" :key="service.id" xs4 sm3 md2 lg1>
-					<v-card class="transparent">
-						<v-img>
-							<v-avatar
-                :size="80"
-								:tile="false"
-							>
-								<img :src="service.icon.content" :alt="service.icon.name">
-							</v-avatar>
-						</v-img>
-						<v-card-text class="title font-weight-regular">{{ service.name }}</v-card-text>
-					</v-card>
+          <v-tooltip top>
+            <v-hover slot="activator">
+              <v-card
+                class="transparent mx-auto"
+                slot-scope="{ hover }"
+                :class="`elevation-${hover ? 15 : 2}`"
+                close-delay="0"
+                @click.native="openLink(service.href)"
+              >
+                <v-img>
+                  <v-avatar
+                    :size="80"
+                    :tile="false"
+                  >
+                    <img :src="service.icon.content" :alt="service.icon.name">
+                  </v-avatar>
+                </v-img>
+                <v-card-text class="title font-weight-regular text-truncate">{{ service.shortened }}</v-card-text>
+              </v-card>
+            </v-hover>
+            <span class="title font-weight-regular">{{ service.name }}</span>
+          </v-tooltip>
 				</v-flex>
 			</v-layout>
 		</v-container>
@@ -80,6 +91,9 @@ export default {
         });
         this.services = group.services;
       }
+    },
+    openLink(url) {
+      window.open(url);
     }
   }
 };
