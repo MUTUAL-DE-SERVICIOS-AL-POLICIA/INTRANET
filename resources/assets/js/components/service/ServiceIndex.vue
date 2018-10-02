@@ -17,10 +17,11 @@
     </v-toolbar>
 		<v-container grid-list-md text-xs-center>
 			<v-layout row wrap>
-				<v-flex v-for="service in services" :key="service.id" xs1>
+				<v-flex v-for="service in services" :key="service.id" xs4 sm3 md2 lg1>
 					<v-card class="transparent">
 						<v-img>
 							<v-avatar
+                :size="80"
 								:tile="false"
 							>
 								<img :src="service.icon.content" :alt="service.icon.name">
