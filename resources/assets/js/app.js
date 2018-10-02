@@ -33,7 +33,7 @@ Vue.use(Vuetify, {
     warning: "#FABB47",
     info: "#0B347F",
     success: "#006157",
-    normal: '#F5F5F5'
+    normal: '#d9d9d9'
   }
 })
 

@@ -1,39 +1,36 @@
 <template>
-  <v-container grid-list-md text-xs-center>
-    <v-layout row wrap>
-      <v-flex v-for="group in groups" :key="group.id" xs4>
-        <v-card dark :color="group.color">
-					<v-card-title primary-title>
-						<span class="headline font-weight-bold">{{ group.name }}</span>
-					</v-card-title>
-					<v-container grid-list-md>
-						<v-layout row wrap>
-							<v-flex v-for="service in group.services" :key="service.id" xs4>
-								<v-hover>
-									<v-card
-										slot-scope="{ hover }"
-										:class="`elevation-${hover ? 20 : 2}`"
-										class="transparent"
-										:close-delay="0"
-									>
-										<a :href="service.href" style="text-decoration: none;">
-											<v-avatar	size="128">
-												<img :src="`data:image/${service.icon.format};base64,${service.icon.content}`" :alt="service.icon.name">
-											</v-avatar>
-											<v-card-text>
-												<span class="headline font-weight-light white--text">
-													{{ service.shortened }}
-												</span>
-											</v-card-text>
-										</a>
-									</v-card>
-								</v-hover>
-							</v-flex>
-						</v-layout>
-					</v-container>
-        </v-card>
+	<v-container>
+    <v-toolbar>
+      <v-toolbar-title>{{ select.name }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-flex xs2>
+        <v-select
+          v-model="select"
+          :items="selection"
+          item-text="shortened"
+          item-value="id"
+          return-object
+          single-line
+          @change="filterGroup"
+        ></v-select>
       </v-flex>
-		</v-layout>
+    </v-toolbar>
+		<v-container grid-list-md text-xs-center>
+			<v-layout row wrap>
+				<v-flex v-for="service in services" :key="service.id" xs1>
+					<v-card class="transparent">
+						<v-img>
+							<v-avatar
+								:tile="false"
+							>
+								<img :src="service.icon.content" :alt="service.icon.name">
+							</v-avatar>
+						</v-img>
+						<v-card-text>{{ service.name }}</v-card-text>
+					</v-card>
+				</v-flex>
+			</v-layout>
+		</v-container>
 	</v-container>
 </template>
 
@@ -42,20 +39,45 @@ export default {
   name: "ServiceIndex",
   data() {
     return {
-			groups: []
+      groups: [],
+      services: [],
+      selection: [],
+      select: { id: 0, name: "APLICACIONES", shortened: "VER TODO" }
     };
-	},
-	mounted() {
-		this.getGroups();
-	},
+  },
+  mounted() {
+    this.selection.push(this.select);
+    this.getGroups();
+  },
   methods: {
+    mergeServices() {
+      this.services = [];
+      this.groups.forEach(group => {
+        group.services.forEach(service => {
+          this.services.push(service);
+        });
+      });
+    },
     async getGroups() {
       try {
         let res = await axios.get("/api/v1/group");
-				this.groups = res.data;
-				console.log(this.groups)
+        this.groups = res.data;
+        this.groups.forEach(group => {
+          this.selection.push(group);
+        });
+        this.mergeServices();
       } catch (e) {
         console.log(e);
+      }
+    },
+    filterGroup() {
+      if (this.select.id == 0) {
+        this.mergeServices();
+      } else {
+        let group = this.groups.find(obj => {
+          return obj.id == this.select.id;
+        });
+        this.services = group.services;
       }
     }
   }
