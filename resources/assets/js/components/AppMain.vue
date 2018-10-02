@@ -1,26 +1,23 @@
 <template>
   <v-app>
+    <v-card>
     <v-toolbar color="normal" fixed app>      
       <v-img src="/img/logo.png" contain max-width="150"></v-img>
-      <v-divider
-          class="mx-2"
-          inset
-          vertical
-        ></v-divider>
+      
       <v-spacer></v-spacer>      
       <v-toolbar-title>INTRANET - Escritorio Virtual</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-divider
-          class="mx-2"
-          inset
-          vertical
-        ></v-divider>
+      
       <v-img src="/img/escudo_bolivia.png" contain max-width="80"></v-img>
     </v-toolbar>
+  </v-card>
+
     <v-content>
-      <v-slide-x-transition>
-        <router-view></router-view>
-      </v-slide-x-transition>
+      <v-parallax src="/img/fondo.jpg" height="900">
+        <v-slide-x-transition>        
+          <router-view></router-view>      
+        </v-slide-x-transition>
+      </v-parallax>
     </v-content>
     <v-footer fixed app>
       <v-spacer></v-spacer>
