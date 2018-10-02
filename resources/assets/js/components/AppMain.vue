@@ -2,10 +2,14 @@
   <v-app>
     <AppHeader></AppHeader>
     <v-content>
-      <v-parallax src="/img/fondo.jpg" fluid height="900">
-        <v-slide-x-transition>
-          <router-view></router-view>
-        </v-slide-x-transition>
+      <v-parallax src="/img/fondo.jpg" fluid>
+        <v-layout
+          align-center
+          column>
+          <v-slide-x-transition>
+            <router-view></router-view>
+          </v-slide-x-transition>
+        </v-layout>
       </v-parallax>
     </v-content>
     <AppFooter></AppFooter>
