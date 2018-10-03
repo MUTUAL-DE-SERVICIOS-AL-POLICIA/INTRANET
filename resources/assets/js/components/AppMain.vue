@@ -1,8 +1,7 @@
 <template>
   <v-app>
     <AppHeader></AppHeader>
-    <v-content>
-      <v-parallax src="/img/fondo.jpg" height="100%">
+    <v-content style="background-image: url('/img/fondo.jpg');">      
         <v-layout
           align-center
           column>
@@ -10,12 +9,10 @@
             <router-view></router-view>
           </v-slide-x-transition>
         </v-layout>
-      </v-parallax>
     </v-content>
     <AppFooter></AppFooter>
   </v-app>
 </template>
-
 <script>
 import AppHeader from './AppHeader'
 import AppFooter from './AppFooter'
