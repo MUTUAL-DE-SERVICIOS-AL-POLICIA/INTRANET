@@ -19,7 +19,6 @@ Route::group([
 		Route::get('auth', 'Api\V1\AuthController@show')->name('profile');
 		Route::delete('auth', 'Api\V1\AuthController@destroy')->name('logout');
 		Route::patch('auth', 'Api\V1\AuthController@update')->name('refresh');
-		Route::resource('icon', 'Api\V1\IconController');
 		Route::post('icon', 'Api\V1\IconController@store')->name('icon_store');
 		Route::patch('icon/{id}', 'Api\V1\IconController@update')->name('icon_update');
 		Route::delete('icon/{id}', 'Api\V1\IconController@destroy')->name('icon_destroy');

@@ -27,7 +27,7 @@ export const routes = [
       requiresAuth: false
     }
   }, {
-    path: '/icons',
+    path: '/icon',
     component: IconIndex,
     name: 'iconIndex',
     meta: {
