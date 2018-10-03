@@ -22,7 +22,7 @@
                 ></v-text-field>
                 <div align="center">
                 <div class="upload-btn-wrapper">
-                  <button class="btn">Cargar Icono</button>
+                  <button class="btn"><v-icon>file_upload</v-icon> Cargar Icono</button>
                       <input
                       type="file"
                       accept="image/*"
