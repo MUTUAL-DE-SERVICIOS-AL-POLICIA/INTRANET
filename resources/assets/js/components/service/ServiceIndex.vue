@@ -39,13 +39,13 @@
           <v-tooltip top>
             <v-hover slot="activator">
               <v-card
-                class="transparent mx-auto"
+                class="blurred"
                 slot-scope="{ hover }"
                 :class="`elevation-${hover ? 15 : 2}`"
                 close-delay="0"
                 @click.native="openLink(service)"
               >
-                <v-img>
+                <v-img class="pt-3">
                   <v-avatar
                     :size="80"
                     :tile="false"
@@ -202,3 +202,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.blurred {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+</style>
