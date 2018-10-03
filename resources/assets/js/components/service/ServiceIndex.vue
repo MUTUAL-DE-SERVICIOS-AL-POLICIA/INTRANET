@@ -4,6 +4,21 @@
       <v-toolbar-title>{{ select.name }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <ServiceForm :bus="bus"></ServiceForm>
+      <v-btn
+        color="tertiary"
+        dark
+        :to="{ name: 'iconIndex' }"
+      >
+        Íconos
+      </v-btn>
+      <v-btn
+        color="tertiary"
+        dark
+        :to="{ name: 'groupIndex' }"
+        class="mr-4"
+      >
+        Grupos
+      </v-btn>
       <v-flex xs2>
         <v-select
           v-model="select"
