@@ -3,7 +3,8 @@
     <v-toolbar>
       <v-toolbar-title>{{ select.name }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <ServiceForm :bus="bus"></ServiceForm>
+      <RemoveItem :bus="bus"/>
+      <ServiceForm :bus="bus"/>
       <v-btn
         color="tertiary"
         dark
@@ -89,11 +90,13 @@
 <script>
 import Vue from "vue";
 import ServiceForm from "./ServiceForm";
+import RemoveItem from "../RemoveItem";
 
 export default {
   name: "ServiceIndex",
   components: {
-    ServiceForm
+    ServiceForm,
+    RemoveItem
   },
   data() {
     return {
@@ -114,6 +117,10 @@ export default {
       this.rightClickMenu.push({
         option: 1,
         title: "Editar"
+      });
+      this.rightClickMenu.push({
+        option: 2,
+        title: "Eliminar"
       });
     }
     this.selection.push(this.select);
@@ -194,6 +201,8 @@ export default {
         case 1:
           this.bus.$emit("openDialog", this.selected);
           break;
+        case 2:
+          this.bus.$emit("openDialogRemove", `/api/v1/service/${this.selected.id}`);
       }
     },
     newItem() {
