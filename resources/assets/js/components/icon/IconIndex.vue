@@ -66,7 +66,7 @@ import IconForm from "./IconForm";
 import RemoveItem from "../RemoveItem";
 import { admin, rrhh, juridica } from "../../menu.js";
 export default {
-  name: "IconIndex",
+  name: "iconIndex",
   components: {
     IconForm,
     RemoveItem

@@ -95,9 +95,9 @@ router.beforeEach((to, from, next) => {
 
   if (requiresAuth && !currentUser) {
     next({
-      path: '/login'
+      name: 'loginForm'
     })
-  } else if (to.path == '/login' && currentUser) {
+  } else if (to.path == '/auth/login' && currentUser) {
     next({
       path: '/'
     })
