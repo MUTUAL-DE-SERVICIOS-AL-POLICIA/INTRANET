@@ -126,16 +126,7 @@ export default {
       this.bus.$emit("openDialog", $.extend({}, item, { mode: mode }));
     },
     async removeItem(item) {
-      let payroll = await axios.get(
-        "/api/v1/payroll/getpayrollcontract/" + item.id
-      );
-      if (payroll.data) {
-        alert(
-          "No se puede eliminar. Porque este contrato ya se encuentra en PLANILLAS"
-        );
-      } else {
-        this.bus.$emit("openDialogRemove", `/api/v1/contract/${item.id}`);
-      }
+      this.bus.$emit("openDialogRemove", `/api/v1/icon/${item.id}`);
     }
   }
 };
