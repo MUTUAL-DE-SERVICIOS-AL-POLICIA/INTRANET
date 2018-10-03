@@ -8,6 +8,7 @@ Route::group([
 	Route::get('group', 'Api\V1\GroupController@index')->name('group_list');
 	Route::resource('service', 'Api\V1\ServiceController');
 	Route::resource('icon', 'Api\V1\IconController');
+	Route::resource('group', 'Api\V1\GroupController');
 	Route::post('auth', 'Api\V1\AuthController@store')->name('login');
 	Route::group([
 		'middleware' => 'jwt.auth'
