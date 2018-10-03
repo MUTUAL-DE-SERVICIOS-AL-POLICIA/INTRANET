@@ -19,6 +19,10 @@ export default {
   methods: {
     logout() {
       this.$store.commit("logout");
+      this.$router.push({
+        name: "serviceIndex"
+      });
+      location.reload();
     }
   }
 };

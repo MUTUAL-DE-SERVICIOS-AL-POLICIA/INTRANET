@@ -5,9 +5,7 @@
         <v-layout
           align-center
           column>
-          <v-slide-x-transition>
-            <router-view></router-view>
-          </v-slide-x-transition>
+          <router-view></router-view>
         </v-layout>
     </v-content>
     <AppFooter></AppFooter>
