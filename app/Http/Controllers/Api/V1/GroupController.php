@@ -15,16 +15,9 @@ class GroupController extends Controller
    */
   public function index()
   {
-    $groups = Group::get();
-
-    foreach ($groups as $group) {
-      $services = $group->services;
-      foreach ($services as $service) {
-        $service->icon;
-      }
-    }
-
-    return $groups;
+    return Group::orderBy('name', 'ASC')->with(['services' => function ($query) {
+      $query->orderBy('name', 'DESC');
+    }])->with('services.icon')->get();
   }
 
   /**

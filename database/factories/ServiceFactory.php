@@ -11,9 +11,9 @@ $factory->define(App\Service::class, function (Faker $faker) {
   $groups = App\Group::get()->all();
 
   return [
-    'shortened' => $faker->word(),
-    'name' => $faker->unique()->company,
-    'href' => $faker->url(),
+    'shortened' => $faker->unique()->word(),
+    'name' => $faker->company,
+    'href' => $faker->unique()->url(),
     'hrefManual' => $faker->url(),
     'icon_id' => $icons[array_rand($icons)]->id,
     'group_id' => $groups[array_rand($groups)]->id,

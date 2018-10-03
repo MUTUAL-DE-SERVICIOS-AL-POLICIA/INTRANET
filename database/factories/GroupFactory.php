@@ -6,7 +6,7 @@ $factory->define(App\Group::class, function (Faker $faker) {
   $faker->addProvider(new \Faker\Provider\Lorem($faker));
 
   return [
-    'shortened' => $faker->word(),
-    'name' => $faker->sentence()
+    'shortened' => $faker->unique()->word(),
+    'name' => $faker->unique()->sentence()
   ];
 });

@@ -78,7 +78,7 @@ axios.interceptors.response.use(response => {
   if (error.response) {
     if (error.response.status == 401) {
       store.dispatch('logout')
-      router.push('login')
+      router.push('service')
     }
     for (let key in error.response.data.errors) {
       error.response.data.errors[key].forEach(error => {

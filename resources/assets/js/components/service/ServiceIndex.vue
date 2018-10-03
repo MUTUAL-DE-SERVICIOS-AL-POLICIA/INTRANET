@@ -3,6 +3,7 @@
     <v-toolbar>
       <v-toolbar-title>{{ select.name }}</v-toolbar-title>
       <v-spacer></v-spacer>
+      <ServiceForm :bus="bus"></ServiceForm>
       <v-flex xs2>
         <v-select
           v-model="select"
@@ -25,15 +26,19 @@
                 slot-scope="{ hover }"
                 :class="`elevation-${hover ? 15 : 2}`"
                 close-delay="0"
-                @click.native="openLink(service.href)"
+                @click.native="openLink(service)"
               >
                 <v-img>
                   <v-avatar
                     :size="80"
                     :tile="false"
-                    @contextmenu="show($event, service.hrefManual)"
+                    @contextmenu="show($event, service)"
                   >
-                    <img :src="service.icon.content" :alt="service.icon.name">
+                    <img :src="service.icon.content" :alt="service.icon.name" v-if="service.icon.content">
+                    <v-icon
+                      v-else
+                      large
+                    >add</v-icon>
                   </v-avatar>
                 </v-img>
                 <v-card-text class="title font-weight-regular text-truncate">{{ service.shortened }}</v-card-text>
@@ -55,7 +60,7 @@
         <v-list-tile
           v-for="(item, index) in rightClickMenu"
           :key="index"
-          @click="openManual(item.option)"
+          @click="selectOption(item.option)"
         >
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>
         </v-list-tile>
@@ -65,14 +70,21 @@
 </template>
 
 <script>
+import Vue from "vue";
+import ServiceForm from "./ServiceForm";
+
 export default {
   name: "ServiceIndex",
+  components: {
+    ServiceForm
+  },
   data() {
     return {
+      bus: new Vue(),
       showMenu: false,
       x: 0,
       y: 0,
-      hrefManual: "",
+      selected: {},
       groups: [],
       services: [],
       selection: [],
@@ -81,12 +93,34 @@ export default {
     };
   },
   mounted() {
+    if (this.$store.getters.currentUser) {
+      this.rightClickMenu.push({
+        option: 1,
+        title: "Editar"
+      });
+    }
     this.selection.push(this.select);
     this.getGroups();
+    this.bus.$on("closeDialog", () => {
+      this.getGroups();
+    });
   },
   methods: {
+    addNewService() {
+      if (this.$store.getters.currentUser) {
+        this.services.push({
+          id: 0,
+          name: "AÑADIR SERVICIO",
+          shortened: "NUEVO",
+          icon: {
+            content: null
+          }
+        });
+      }
+    },
     mergeServices() {
       this.services = [];
+      this.addNewService();
       this.groups.forEach(group => {
         group.services.forEach(service => {
           this.services.push(service);
@@ -101,6 +135,7 @@ export default {
           this.selection.push(group);
         });
         this.mergeServices();
+        this.filterGroup();
       } catch (e) {
         console.log(e);
       }
@@ -115,12 +150,16 @@ export default {
         this.services = group.services;
       }
     },
-    openLink(url) {
-      window.open(url);
+    openLink(service) {
+      if (service.id != 0) {
+        window.open(service.href);
+      } else {
+        this.bus.$emit("openDialog");
+      }
     },
-    show(e, url) {
-      if (url != null) {
-        this.hrefManual = url;
+    show(e, service) {
+      if (service.id != 0) {
+        this.selected = service;
         e.preventDefault();
         this.showMenu = false;
         this.x = e.clientX;
@@ -130,12 +169,18 @@ export default {
         });
       }
     },
-    openManual(option) {
+    selectOption(option) {
       switch (option) {
         case 0:
-          window.open(this.hrefManual);
+          window.open(this.selected.hrefManual);
+          break;
+        case 1:
+          this.bus.$emit("openDialog", this.selected);
           break;
       }
+    },
+    newItem() {
+      this.bus.$emit("openDialog");
     }
   }
 };

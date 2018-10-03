@@ -14,5 +14,7 @@ Route::group([
 		Route::get('auth', 'Api\V1\AuthController@show')->name('profile');
 		Route::delete('auth', 'Api\V1\AuthController@destroy')->name('logout');
 		Route::patch('auth', 'Api\V1\AuthController@update')->name('refresh');
+		Route::resource('icon', 'Api\V1\IconController');
+		Route::resource('service', 'Api\V1\ServiceController');
 	});
 });

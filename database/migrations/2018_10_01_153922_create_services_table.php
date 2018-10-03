@@ -15,9 +15,9 @@ class CreateServicesTable extends Migration
   {
     Schema::create('services', function (Blueprint $table) {
       $table->increments('id');
-      $table->string('shortened');
+      $table->string('shortened')->unique();
       $table->string('name')->nullable();
-      $table->string('href');
+      $table->string('href')->unique();
       $table->string('hrefManual')->nullable();
       $table->integer('icon_id')->unsigned();
       $table->foreign('icon_id')->references('id')->on('icons');
