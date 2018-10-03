@@ -8,6 +8,7 @@
         color="tertiary"
         dark
         :to="{ name: 'iconIndex' }"
+        v-if="$store.getters.currentUser"
       >
         Íconos
       </v-btn>
@@ -16,6 +17,7 @@
         dark
         :to="{ name: 'groupIndex' }"
         class="mr-4"
+        v-if="$store.getters.currentUser"
       >
         Grupos
       </v-btn>
