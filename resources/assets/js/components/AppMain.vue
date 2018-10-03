@@ -2,7 +2,7 @@
   <v-app>
     <AppHeader></AppHeader>
     <v-content>
-      <v-parallax src="/img/fondo.jpg" fluid>
+      <v-parallax src="/img/fondo.jpg" height="100%">
         <v-layout
           align-center
           column>
