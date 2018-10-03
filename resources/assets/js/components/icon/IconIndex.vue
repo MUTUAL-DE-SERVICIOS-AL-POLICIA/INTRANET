@@ -3,6 +3,21 @@
     <v-toolbar>
         <v-toolbar-title>Iconos</v-toolbar-title>
         <v-spacer></v-spacer>
+        <v-btn
+          color="tertiary"
+          dark
+          :to="{ name: 'serviceIndex' }"
+        >
+          Servicios
+        </v-btn>
+        <v-btn
+          color="tertiary"
+          dark
+          :to="{ name: 'groupIndex' }"
+          class="mr-4"
+        >
+          Grupos
+        </v-btn>
         <v-divider
           class="mx-2"
           inset
