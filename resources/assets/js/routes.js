@@ -23,12 +23,11 @@ export const routes = [
     path: '/auth/login',
     component: LoginForm,
     name: 'loginForm',
-    path: '/icon',
     meta: {
       requiresAuth: false
     }
   }, {
-    path: '/icons',
+    path: '/icon',
     component: IconIndex,
     name: 'iconIndex',
     meta: {
