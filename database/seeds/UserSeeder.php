@@ -17,24 +17,6 @@ class UserSeeder extends Seeder
 			'description' => 'Administrador',
 		]);
 
-		$role = App\Role::create([
-			'name' => 'rrhh',
-			'display_name' => 'RR.HH.',
-			'description' => 'Gestión de Empleados',
-		]);
-
-		$role = App\Role::create([
-			'name' => 'juridica',
-			'display_name' => 'Juridica',
-			'description' => 'Gestión de Contratos',
-		]);
-
-		$role = App\Role::create([
-			'name' => 'financiera',
-			'display_name' => 'Financiera',
-			'description' => 'Impresión de Planillas',
-		]);
-
 		$user = App\User::create([
 			'username' => 'admin',
 			'password' => bcrypt('admin'),

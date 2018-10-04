@@ -79,7 +79,7 @@
 import Vue from "vue";
 import IconForm from "./IconForm";
 import RemoveItem from "../RemoveItem";
-import { admin, rrhh, juridica } from "../../menu.js";
+import { admin } from "../../menu.js";
 export default {
   name: "iconIndex",
   components: {
