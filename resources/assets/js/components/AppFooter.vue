@@ -1,6 +1,6 @@
 <template>
   <v-footer fixed app>
-    <v-btn flat small v-if="!$store.getters.currentUser":to="{ name: 'loginForm' }">
+    <v-btn flat small v-if="!$store.getters.currentUser" :to="{ name: 'loginForm' }">
       <span class="font-weight-thin caption">Ingresar</span>
     </v-btn>
     <v-btn flat small v-else @click.native="logout">
