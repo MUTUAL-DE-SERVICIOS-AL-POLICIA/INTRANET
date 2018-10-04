@@ -20,7 +20,7 @@
             <v-text-field v-validate="'required|url:require_protocol'" :error-messages="errors.collect('Enlace')" data-vv-name="Enlace" v-model="edit.href" label="Enlace" clearable></v-text-field>
           </v-flex>
           <v-flex xs12>
-            <v-text-field v-validate="'url:require_protocol'" :error-messages="errors.collect('Enlace Manual')" data-vv-name="Enlace Manual" v-model="edit.hrefManual" label="Enlace Manual" clearable></v-text-field>
+            <v-text-field v-validate="'url:require_protocol'" :error-messages="errors.collect('Enlace Manual')" data-vv-name="Enlace Manual" v-model="edit.href_manual" label="Enlace Manual" clearable></v-text-field>
           </v-flex>
           <v-layout wrap>
             <v-flex xs8>
@@ -63,7 +63,7 @@ export default {
       newService: true,
       edit: {
         href: "https://",
-        hrefManual: "https://"
+        href_mManual: "https://"
       },
       groups: [],
       iconName: null,
@@ -113,7 +113,7 @@ export default {
     resetVariables() {
       this.edit = {
         href: "https://",
-        hrefManual: "https://"
+        href_manual: "https://"
       };
       this.iconName = null;
       this.iconContent = null;

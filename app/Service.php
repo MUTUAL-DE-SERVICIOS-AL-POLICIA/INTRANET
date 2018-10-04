@@ -8,7 +8,7 @@ class Service extends Model
 {
   public $timestamps = true;
   public $guarded = ['id'];
-  protected $fillable = ['icon_id', 'group_id', 'shortened', 'name', 'href', 'description'];
+  protected $fillable = ['icon_id', 'group_id', 'shortened', 'name', 'href', 'href_manual', 'description'];
 
   public function icon()
   {

@@ -196,7 +196,7 @@ export default {
     selectOption(option) {
       switch (option) {
         case 0:
-          window.open(this.selected.hrefManual);
+          window.open(this.selected.href_manual);
           break;
         case 1:
           this.bus.$emit("openDialog", this.selected);

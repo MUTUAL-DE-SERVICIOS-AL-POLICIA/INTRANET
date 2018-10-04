@@ -18,7 +18,7 @@ class CreateServicesTable extends Migration
       $table->string('shortened')->unique();
       $table->string('name')->nullable();
       $table->string('href')->unique();
-      $table->string('hrefManual')->nullable();
+      $table->string('href_manual')->nullable();
       $table->integer('icon_id')->unsigned();
       $table->foreign('icon_id')->references('id')->on('icons');
       $table->integer('group_id')->unsigned();

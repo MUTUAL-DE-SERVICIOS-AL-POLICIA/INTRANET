@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class ServiceController extends Controller
 {
