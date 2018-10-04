@@ -93,7 +93,7 @@ export default {
   methods: {
     async getGroups() {
       try {
-        let res = await axios.get("/api/v1/group");
+        let res = await axios.get("/group");
         this.groups = res.data;
       } catch (e) {
         console.log(e);
@@ -101,7 +101,7 @@ export default {
     },
     async getIcons() {
       try {
-        let res = await axios.get("/api/v1/icon");
+        let res = await axios.get("/icon");
         this.icons = res.data;
         this.icons.forEach(icon => {
           this.iconNames.push(icon.name);
@@ -130,11 +130,15 @@ export default {
         let res;
         if (valid) {
           if (this.newService) {
-            res = await axios.post(`/api/v1/service`, this.edit);
+            res = await axios.post(`/service`, this.edit, {
+              headers: {
+                Authorization: `${this.$store.getters.token.type} ${this.$store.getters.token.value}`
+              }
+            });
             this.toastr.success("Insertado correctamente");
           } else {
             res = await axios.patch(
-              `/api/v1/service/${this.edit.id}`,
+              `/service/${this.edit.id}`,
               this.edit
             );
             this.toastr.success("Actualizado correctamente");

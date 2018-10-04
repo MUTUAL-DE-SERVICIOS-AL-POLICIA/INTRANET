@@ -153,7 +153,7 @@ export default {
     },
     async getGroups() {
       try {
-        let res = await axios.get("/api/v1/group");
+        let res = await axios.get("/group");
         this.groups = res.data;
         this.groups.forEach(group => {
           this.selection.push(group);
@@ -202,7 +202,7 @@ export default {
           this.bus.$emit("openDialog", this.selected);
           break;
         case 2:
-          this.bus.$emit("openDialogRemove", `/api/v1/service/${this.selected.id}`);
+          this.bus.$emit("openDialogRemove", `/service/${this.selected.id}`);
       }
     },
     newItem() {

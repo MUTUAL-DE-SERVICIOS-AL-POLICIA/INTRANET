@@ -4,7 +4,11 @@ export default {
   state: {
     currentUser: localStorage.getItem('user') || null,
     menuLeft: null,
-    ldapAuth: JSON.parse(process.env.MIX_ADLDAP_AUTHENTICATION)
+    ldapAuth: JSON.parse(process.env.MIX_ADLDAP_AUTHENTICATION),
+    token: {
+      type: localStorage.getItem('token_type') || null,
+      value: localStorage.getItem('token') || null
+    }
   },
   getters: {
     ldapAuth(state) {
@@ -18,6 +22,9 @@ export default {
         return menu[JSON.parse(state.currentUser).roles[0].name]
       }
       return null
+    },
+    token(state) {
+      return state.token
     }
   },
   mutations: {
@@ -33,6 +40,13 @@ export default {
       localStorage.setItem("token_type", data.token_type);
       localStorage.setItem("user", JSON.stringify(data.user));
       state.currentUser = localStorage.getItem('user');
+      state.token = {
+        type: localStorage.getItem('token_type'),
+        value: localStorage.getItem('token')
+      }
+      axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+      axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Authorization';
+      axios.defaults.headers.common['Authorization'] = `${state.token.type} ${state.token.value}`;
     }
   },
   actions: {

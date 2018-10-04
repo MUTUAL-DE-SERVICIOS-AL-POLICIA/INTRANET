@@ -129,7 +129,7 @@ export default {
   methods: {
     async getGroups() {
       try {
-        let res = await axios.get(`/api/v1/group`);
+        let res = await axios.get(`/group`);
         this.groups = res.data;
         
       } catch (e) {
@@ -140,7 +140,7 @@ export default {
       this.bus.$emit("openDialog", item);
     },
     async removeItem(item) {
-      this.bus.$emit("openDialogRemove", `/api/v1/group/${item.id}`);
+      this.bus.$emit("openDialogRemove", `/group/${item.id}`);
     }
   }
 };

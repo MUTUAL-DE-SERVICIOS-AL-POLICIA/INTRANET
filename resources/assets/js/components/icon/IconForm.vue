@@ -102,11 +102,11 @@ export default {
       try {
         await this.$validator.validateAll();
         if (this.selectedIndex != -1) {
-          let res = await axios.patch("/api/v1/icon/" + this.selectedItem.id, this.selectedItem);
+          let res = await axios.patch("/icon/" + this.selectedItem.id, this.selectedItem);
           this.close();
           this.toastr.success("Editado correctamente");
         } else {
-          let res = await axios.post("/api/v1/icon", this.selectedItem);
+          let res = await axios.post("/icon", this.selectedItem);
           this.close();
           this.toastr.success("Registrado correctamente");
         }

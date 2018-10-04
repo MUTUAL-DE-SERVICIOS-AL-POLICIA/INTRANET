@@ -21,11 +21,7 @@ class AuthController extends Controller
 
 	public function __construct()
 	{
-		if (config('app.debug')) {
-			$this->middleware('auth:api', ['except' => ['store', 'show', 'update', 'destroy']]);
-		} else {
-			$this->middleware('auth:api', ['except' => ['store']]);
-		}
+		$this->middleware('auth:api', ['except' => ['store']]);
 
 		if (env("ADLDAP_AUTHENTICATION")) {
 			$this->config = array(
@@ -52,17 +48,6 @@ class AuthController extends Controller
 	 */
 	public function store(AuthForm $request)
 	{
-		if (config('app.debug')) {
-			$token = auth('api')->attempt([
-				'username' => 'admin',
-				'password' => 'admin',
-			]);
-
-			if ($token) {
-				return $this->respondWithToken($token);
-			}
-		}
-
 		$credentials = request(['username', 'password']);
 
 		if (!env("ADLDAP_AUTHENTICATION")) {

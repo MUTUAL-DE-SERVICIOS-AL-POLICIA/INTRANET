@@ -130,7 +130,7 @@ export default {
   methods: {
     async getIcons() {
       try {
-        let res = await axios.get(`/api/v1/icon`);
+        let res = await axios.get(`/icon`);
         this.icons = res.data;
         
       } catch (e) {
@@ -141,7 +141,7 @@ export default {
       this.bus.$emit("openDialog", $.extend({}, item, { mode: mode }));
     },
     async removeItem(item) {
-      this.bus.$emit("openDialogRemove", `/api/v1/icon/${item.id}`);
+      this.bus.$emit("openDialogRemove", `/icon/${item.id}`);
     }
   }
 };
