@@ -1,7 +1,7 @@
 <template>
   <v-footer fixed app>
-    <v-btn flat small v-if="!$store.getters.currentUser">
-      <router-link tag="span" :to="{ name: 'loginForm' }" class="font-weight-thin caption">Ingresar</router-link>
+    <v-btn flat small v-if="!$store.getters.currentUser":to="{ name: 'loginForm' }">
+      <span class="font-weight-thin caption">Ingresar</span>
     </v-btn>
     <v-btn flat small v-else @click.native="logout">
       <span class="font-weight-thin caption">
