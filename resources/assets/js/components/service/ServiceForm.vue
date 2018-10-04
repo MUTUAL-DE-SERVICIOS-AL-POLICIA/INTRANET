@@ -130,11 +130,7 @@ export default {
         let res;
         if (valid) {
           if (this.newService) {
-            res = await axios.post(`/service`, this.edit, {
-              headers: {
-                Authorization: `${this.$store.getters.token.type} ${this.$store.getters.token.value}`
-              }
-            });
+            res = await axios.post(`/service`, this.edit);
             this.toastr.success("Insertado correctamente");
           } else {
             res = await axios.patch(

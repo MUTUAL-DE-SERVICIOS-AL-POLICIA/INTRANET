@@ -44,9 +44,9 @@ export default {
         type: localStorage.getItem('token_type'),
         value: localStorage.getItem('token')
       }
-      axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-      axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Authorization';
-      axios.defaults.headers.common['Authorization'] = `${state.token.type} ${state.token.value}`;
+      axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+      axios.defaults.headers['Access-Control-Allow-Headers'] = 'Authorization';
+      axios.defaults.headers['Authorization'] = `${state.token.type} ${state.token.value}`;
     }
   },
   actions: {
