@@ -1,4 +1,4 @@
-# RR.HH. SPA
+# Virtual Desktop
 
 ## Requirements
 
