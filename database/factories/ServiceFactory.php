@@ -15,6 +15,7 @@ $factory->define(App\Service::class, function (Faker $faker) {
     'name' => $faker->company,
     'href' => $faker->unique()->url(),
     'href_manual' => $faker->url(),
+    'href_test' => $faker->url(),
     'icon_id' => $icons[array_rand($icons)]->id,
     'group_id' => $groups[array_rand($groups)]->id,
     'description' => $faker->sentence(),

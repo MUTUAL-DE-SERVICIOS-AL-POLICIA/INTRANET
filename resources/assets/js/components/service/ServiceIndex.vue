@@ -34,9 +34,9 @@
         ></v-select>
       </v-flex>
     </v-toolbar>
-		<v-container grid-list-md text-xs-center>
-			<v-layout row wrap>
-				<v-flex v-for="service in services" :key="service.id" xs4 sm3 md2 lg1>
+		<v-container fluid fill-height>
+			<v-layout row wrap align-center justify-center text-xs-center>
+				<v-flex v-for="service in services" :key="service.id" xs4 sm3 md2 lg1 class="ml-3 mr-3 mb-4">
           <v-tooltip top>
             <v-hover slot="activator">
               <v-card
@@ -109,17 +109,25 @@ export default {
       services: [],
       selection: [],
       select: { id: 0, name: "APLICACIONES", shortened: "VER TODO" },
-      rightClickMenu: [{ option: 0, title: "Ver Manual" }]
+      rightClickMenu: [
+        {
+          option: 0,
+          title: "Ver Manual"
+        }, {
+          option: 1,
+          title: "Versión de Prueba"
+        }
+      ]
     };
   },
   mounted() {
     if (this.$store.getters.currentUser) {
       this.rightClickMenu.push({
-        option: 1,
+        option: 2,
         title: "Editar"
       });
       this.rightClickMenu.push({
-        option: 2,
+        option: 3,
         title: "Eliminar"
       });
     }
@@ -199,10 +207,14 @@ export default {
           window.open(this.selected.href_manual);
           break;
         case 1:
-          this.bus.$emit("openDialog", this.selected);
+          window.open(this.selected.href_test);
           break;
         case 2:
+          this.bus.$emit("openDialog", this.selected);
+          break;
+        case 3:
           this.bus.$emit("openDialogRemove", `/service/${this.selected.id}`);
+          break;
       }
     },
     newItem() {

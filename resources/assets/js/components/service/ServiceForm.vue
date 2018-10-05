@@ -22,6 +22,9 @@
           <v-flex xs12>
             <v-text-field v-validate="'url:require_protocol'" :error-messages="errors.collect('Enlace Manual')" data-vv-name="Enlace Manual" v-model="edit.href_manual" label="Enlace Manual" clearable></v-text-field>
           </v-flex>
+          <v-flex xs12>
+            <v-text-field v-validate="'url:require_protocol'" :error-messages="errors.collect('Enlace Versión de Prueba')" data-vv-name="Enlace Versión de Prueba" v-model="edit.href_test" label="Enlace Versión de Prueba" clearable></v-text-field>
+          </v-flex>
           <v-layout wrap>
             <v-flex xs8>
               <v-autocomplete v-validate="'required'" :error-messages="errors.collect('Ícono')" data-vv-name="Ícono" v-model="iconName" :items="iconNames" :readonly="false" label="Ícono">
@@ -63,7 +66,8 @@ export default {
       newService: true,
       edit: {
         href: "https://",
-        href_mManual: "https://"
+        href_manual: "https://",
+        href_test: "https://"
       },
       groups: [],
       iconName: null,
@@ -113,7 +117,8 @@ export default {
     resetVariables() {
       this.edit = {
         href: "https://",
-        href_manual: "https://"
+        href_manual: "https://",
+        href_test: "https://"
       };
       this.iconName = null;
       this.iconContent = null;
