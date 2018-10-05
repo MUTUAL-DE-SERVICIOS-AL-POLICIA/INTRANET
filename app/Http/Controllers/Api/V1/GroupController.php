@@ -15,9 +15,9 @@ class GroupController extends Controller
    */
   public function index()
   {
-    return Group::orderBy('name', 'ASC')->with(['services' => function ($query) {
+    return Group::with('services.icon')->with(['services' => function ($query) {
       $query->orderBy('name', 'DESC');
-    }])->with('services.icon')->get();
+    }])->orderBy('name', 'ASC')->get();
   }
 
   /**

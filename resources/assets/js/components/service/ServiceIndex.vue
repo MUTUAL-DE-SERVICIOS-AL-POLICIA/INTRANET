@@ -38,27 +38,29 @@
 			<v-layout row wrap align-center justify-center text-xs-center>
 				<v-flex v-for="service in services" :key="service.id" xs4 sm3 md2 lg1 class="ml-3 mr-3 mb-4">
           <v-tooltip top>
-            <v-hover slot="activator">
+            <v-hover slot="activator" close-delay="100">
               <v-card
                 class="blurred"
                 slot-scope="{ hover }"
                 :class="`elevation-${hover ? 15 : 2}`"
-                close-delay="0"
                 @click.native="openLink(service)"
+                @contextmenu="show($event, service)"
               >
-                <v-img class="pt-3">
-                  <v-avatar
-                    :size="80"
-                    :tile="false"
-                    @contextmenu="show($event, service)"
-                  >
-                    <img :src="service.icon.content" :alt="service.icon.name" v-if="service.icon.content">
-                    <v-icon
-                      v-else
-                      large
-                    >add</v-icon>
-                  </v-avatar>
-                </v-img>
+                <v-tooltip bottom open-delay="4000" :disabled="service.description == null || service.description == ''">
+                  <v-img class="pt-3" slot="activator">
+                    <v-avatar
+                      :size="90"
+                      :tile="false"
+                    >
+                      <img :src="service.icon.content" :alt="service.icon.name" v-if="service.icon.content">
+                      <v-icon
+                        v-else
+                        large
+                      >add</v-icon>
+                    </v-avatar>
+                  </v-img>
+                  <span class="title font-weight-light">{{ service.description }}</span>
+                </v-tooltip>
                 <v-card-text class="title font-weight-regular text-truncate">{{ service.shortened }}</v-card-text>
               </v-card>
             </v-hover>
@@ -227,5 +229,7 @@ export default {
 <style>
 .blurred {
   background-color: rgba(255, 255, 255, 0.25) !important;
+  cursor: pointer;
+  border-radius: 15px;
 }
 </style>

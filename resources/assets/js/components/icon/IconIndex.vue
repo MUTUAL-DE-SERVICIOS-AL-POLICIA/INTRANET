@@ -46,7 +46,7 @@
         :headers="headers"
         :items="icons"
         :search="search"
-        :rows-per-page-items="[5,10,20,{text:'TODO',value:-1}]"
+        :rows-per-page-items="[10,20,30,{text:'TODO',value:-1}]"
         disable-initial-sort
         class="elevation-1">
         <template slot="items" slot-scope="props">
