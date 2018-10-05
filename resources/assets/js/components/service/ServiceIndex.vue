@@ -111,28 +111,10 @@ export default {
       services: [],
       selection: [],
       select: { id: 0, name: "APLICACIONES", shortened: "VER TODO" },
-      rightClickMenu: [
-        {
-          option: 0,
-          title: "Ver Manual"
-        }, {
-          option: 1,
-          title: "Versión de Prueba"
-        }
-      ]
+      rightClickMenu: []
     };
   },
   mounted() {
-    if (this.$store.getters.currentUser) {
-      this.rightClickMenu.push({
-        option: 2,
-        title: "Editar"
-      });
-      this.rightClickMenu.push({
-        option: 3,
-        title: "Eliminar"
-      });
-    }
     this.selection.push(this.select);
     this.getGroups();
     this.bus.$on("closeDialog", () => {
@@ -194,6 +176,39 @@ export default {
     show(e, service) {
       if (service.id != 0) {
         this.selected = service;
+
+        this.rightClickMenu = [
+          {
+            option: 0,
+            title: "Abrir"
+          }
+        ]
+
+        if (this.selected.href_manual) {
+          this.rightClickMenu.push({
+            option: 1,
+            title: "Ver Manual"
+          });
+        }
+
+        if (this.selected.href_test) {
+          this.rightClickMenu.push({
+            option: 2,
+            title: "Versión de Prueba"
+          });
+        }
+
+        if (this.$store.getters.currentUser) {
+          this.rightClickMenu.push({
+            option: 3,
+            title: "Editar"
+          });
+          this.rightClickMenu.push({
+            option: 4,
+            title: "Eliminar"
+          });
+        }
+
         e.preventDefault();
         this.showMenu = false;
         this.x = e.clientX;
@@ -206,15 +221,18 @@ export default {
     selectOption(option) {
       switch (option) {
         case 0:
-          window.open(this.selected.href_manual);
+          this.openLink(this.selected)
           break;
         case 1:
-          window.open(this.selected.href_test);
+          window.open(this.selected.href_manual);
           break;
         case 2:
-          this.bus.$emit("openDialog", this.selected);
+          window.open(this.selected.href_test);
           break;
         case 3:
+          this.bus.$emit("openDialog", this.selected);
+          break;
+        case 4:
           this.bus.$emit("openDialogRemove", `/service/${this.selected.id}`);
           break;
       }

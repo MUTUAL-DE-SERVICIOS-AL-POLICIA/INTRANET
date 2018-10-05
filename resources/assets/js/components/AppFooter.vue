@@ -9,7 +9,7 @@
       </span>
     </v-btn>
     <v-spacer></v-spacer>
-    <span class="font-weight-thin caption">MUSERPOL <span class="copyleft">&copy;</span> - 2018</span>
+    <span class="font-weight-thin caption pr-3">MUSERPOL <span class="copyleft">&copy;</span> - 2018</span>
   </v-footer>
 </template>
 

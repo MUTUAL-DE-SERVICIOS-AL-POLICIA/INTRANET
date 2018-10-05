@@ -2,6 +2,12 @@
 
 ---
 
+## [1.1.2](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.1.2) - 2018-10-05
+
+### Changed
+
+* Changed logic of context menu, verify if href exists for every option
+
 ## [1.1.1](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.1.1) - 2018-10-05
 
 ### Added
