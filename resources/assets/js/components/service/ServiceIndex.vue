@@ -36,7 +36,7 @@
     </v-toolbar>
 		<v-container fluid fill-height>
 			<v-layout row wrap align-center justify-center text-xs-center>
-				<v-flex v-for="service in services" :key="service.id" xs4 sm3 md2 lg1 class="ml-3 mr-3 mb-4">
+				<v-flex v-for="service in services" :key="service.id" xs12 sm5 md3 lg2 xl2 class="ml-4 mr-4 mb-5">
           <v-tooltip top>
             <v-hover slot="activator" close-delay="100">
               <v-card
@@ -49,7 +49,7 @@
                 <v-tooltip bottom open-delay="4000" :disabled="service.description == null || service.description == ''">
                   <v-img class="pt-3" slot="activator">
                     <v-avatar
-                      :size="90"
+                      :size="160"
                       :tile="false"
                     >
                       <img :src="service.icon.content" :alt="service.icon.name" v-if="service.icon.content">
@@ -248,6 +248,6 @@ export default {
 .blurred {
   background-color: rgba(255, 255, 255, 0.25) !important;
   cursor: pointer;
-  border-radius: 15px;
+  border-radius: 30px;
 }
 </style>
