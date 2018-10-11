@@ -16,28 +16,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-	private $config;
-	private $adldap;
-
-	public function __construct()
-	{
-		$this->middleware('auth:api', ['except' => ['store']]);
-
-		if (env("ADLDAP_AUTHENTICATION")) {
-			$this->config = array(
-				'user_id_key' => env("ADLDAP_ACCOUNT_PREFIX"),
-				'auto_connect' => env("ADLDAP_AUTO_CONNECT"),
-				'account_suffix' => env("ADLDAP_ACCOUNT_SUFFIX"),
-				'base_dn' => env("ADLDAP_BASEDN"),
-				'domain_controllers' => array(env("ADLDAP_CONTROLLERS")),
-				'ad_port' => env("ADLDAP_PORT"),
-				'use_ssl' => env("ADLDAP_USE_SSL"),
-				'use_tls' => env("ADLDAP_USE_TLS"),
-			);
-
-			$this->adldap = new \Adldap\Adldap($this->config);
-		}
-	}
 
 	/**
 	 * Get a JWT via given credentials.
@@ -50,43 +28,18 @@ class AuthController extends Controller
 	{
 		$credentials = request(['username', 'password']);
 
-		if (!env("ADLDAP_AUTHENTICATION")) {
-			$token = auth('api')->attempt($credentials);
+		$token = auth('api')->attempt($credentials);
 
-			if ($token) {
-				return $this->respondWithToken($token);
-			}
-		} elseif (env("ADLDAP_AUTHENTICATION")) {
-			$bind = $this->adldap->authenticate($this->config['user_id_key'] . '=' . $credentials['username'] . ',', $credentials['password']);
-
-			if ($bind) {
-				$user = User::where('username', $credentials['username'])->where('active', true)->first();
-				if ($user) {
-					if (!Hash::check($credentials['password'], $user->password)) {
-						$user->password = Hash::make($credentials['password']);
-						$user->remember_token = null;
-						$user->save();
-					}
-				} else {
-					$user = new User();
-					$user->username = $credentials['username'];
-					$user->password = Hash::make($credentials['password']);
-					$user->save();
-				}
-				$token = auth('api')->attempt($credentials);
-				$user->remember_token = $token;
-				$user->save();
-
-				return $this->respondWithToken($token);
-			}
+		if ($token) {
+			return $this->respondWithToken($token);
+		} else {
+			return response()->json([
+				'message' => 'No autorizado',
+				'errors' => [
+					'type' => ['Usuario o contraseña incorrectos'],
+				],
+			], 401);
 		}
-		return response()->json([
-			'message' => 'No autorizado',
-			'errors' => [
-				'type' => ['Usuario o contraseña incorrectos'],
-			],
-		], 401);
-
 	}
 
 	/**

@@ -4,6 +4,7 @@ Route::group([
 	'middleware' => 'api',
 	'prefix' => 'v1',
 ], function () {
+	Route::patch('user', 'Api\V1\UserController@update')->name('user_update');
 	Route::get('icon', 'Api\V1\IconController@index')->name('icon_list');
 	Route::get('group', 'Api\V1\GroupController@index')->name('group_list');
 	Route::get('service', 'Api\V1\ServiceController@index')->name('service_list');

@@ -4,16 +4,12 @@ export default {
   state: {
     currentUser: localStorage.getItem('user') || null,
     menuLeft: null,
-    ldapAuth: JSON.parse(process.env.MIX_ADLDAP_AUTHENTICATION),
     token: {
       type: localStorage.getItem('token_type') || null,
       value: localStorage.getItem('token') || null
     }
   },
   getters: {
-    ldapAuth(state) {
-      return state.ldapAuth
-    },
     currentUser(state) {
       return JSON.parse(state.currentUser)
     },

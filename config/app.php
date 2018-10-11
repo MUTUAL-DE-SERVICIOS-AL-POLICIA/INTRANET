@@ -228,8 +228,8 @@ return [
 		// ACL Entrust
 		'Laratrust' => Laratrust\LaratrustFacade::class,
 
-		// Util
-		'Util' => App\Helpers\Util::class,
+		// LDAP
+		'Ldap' => App\Helpers\Ldap::class,
 
 		// Carbon
 		'Carbon' => \Carbon\Carbon::class,

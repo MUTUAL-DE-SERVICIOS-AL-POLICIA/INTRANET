@@ -24,15 +24,18 @@ class UserForm extends FormRequest
 	public function rules()
 	{
 		return [
-			'oldPassword' => 'required|min:5|max:255',
-			'newPassword' => 'required|min:5|max:255',
+			'username' => 'required|min:4|max:255',
+			'old_password' => 'required|min:5|max:255',
+			'new_password' => 'required|min:5|max:255',
 		];
 	}
 
 	public function messages()
 	{
 		return [
-			'required' => 'La contraseña no puede estar vacía',
+			'username.required' => 'El usuario no puede estar vacío',
+			'old_password.required' => 'La contraseña no puede estar vacía',
+			'new_password.required' => 'La nueva contraseña no puede estar vacía',
 			'min' => 'El número mínimo de caracteres es 5',
 			'max' => 'El número máximo de caracteres es 255',
 		];
