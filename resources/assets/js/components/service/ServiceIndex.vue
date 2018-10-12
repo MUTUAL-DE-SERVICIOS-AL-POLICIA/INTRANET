@@ -8,6 +8,15 @@
       <v-btn
         color="tertiary"
         dark
+        :to="{ name: 'changePassword' }"
+        class="mr-5"
+        v-if="!$store.getters.currentUser"
+      >
+        Cambiar contraseña
+      </v-btn>
+      <v-btn
+        color="tertiary"
+        dark
         :to="{ name: 'iconIndex' }"
         v-if="$store.getters.currentUser"
       >
@@ -17,7 +26,7 @@
         color="tertiary"
         dark
         :to="{ name: 'groupIndex' }"
-        class="mr-4"
+        class="mr-5"
         v-if="$store.getters.currentUser"
       >
         Grupos

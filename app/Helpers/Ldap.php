@@ -15,6 +15,7 @@ class Ldap
       'ldap_ssl' => env("LDAP_SSL"),
       'user_id_key' => env("LDAP_ACCOUNT_PREFIX"),
       'base_dn' => env("LDAP_BASEDN"),
+      'timeout' => env("LDAP_TIMEOUT")
     );
 
     $this->config['account_suffix'] = implode(',', [env("LDAP_ACCOUNT_SUFFIX"), $this->config['base_dn']]);
@@ -27,6 +28,11 @@ class Ldap
       ldap_set_option($this->connection, LDAP_OPT_PROTOCOL_VERSION, 3);
       ldap_set_option($this->connection, LDAP_OPT_REFERRALS, 0);
     }
+  }
+
+  public function verify_open_port()
+  {
+    return @fsockopen($this->config['ldap_host'], $this->config['ldap_port'], $errno, $errstr, $this->config['timeout']);
   }
 
   public function get_config()
@@ -42,11 +48,7 @@ class Ldap
   public function bind($username, $password)
   {
     if ($this->connection) {
-      $bind = @ldap_bind($this->connection, $this->config['user_id_key'] . '=' . $username . ',' . $this->config['account_suffix'], $password);
-
-      if ($bind) {
-        return true;
-      }
+      return @ldap_bind($this->connection, $this->config['user_id_key'] . '=' . $username . ',' . $this->config['account_suffix'], $password);
     }
     return false;
   }
@@ -61,11 +63,7 @@ class Ldap
 
       $new_password = array('userPassword' => "{SSHA}" . base64_encode(pack("H*", sha1($new_password . $salt)) . $salt));
 
-      $updated = @ldap_mod_replace($this->connection, $this->config['user_id_key'] . '=' . $username . ',' . $this->config['account_suffix'], $new_password);
-
-      if ($updated) {
-        return true;
-      }
+      return @ldap_mod_replace($this->connection, $this->config['user_id_key'] . '=' . $username . ',' . $this->config['account_suffix'], $new_password);
     }
     return false;
   }

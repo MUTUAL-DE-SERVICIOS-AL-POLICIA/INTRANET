@@ -1,5 +1,6 @@
 import ServiceIndex from './components/service/ServiceIndex'
 import LoginForm from './components/login/LoginForm'
+import ChangePassword from './components/login/ChangePassword'
 import IconIndex from './components/icon/IconIndex'
 import GroupIndex from './components/group/GroupIndex'
 
@@ -23,6 +24,13 @@ export const routes = [
     path: '/auth/login',
     component: LoginForm,
     name: 'loginForm',
+    meta: {
+      requiresAuth: false
+    }
+  }, {
+    path: '/auth/change_password',
+    component: ChangePassword,
+    name: 'changePassword',
     meta: {
       requiresAuth: false
     }

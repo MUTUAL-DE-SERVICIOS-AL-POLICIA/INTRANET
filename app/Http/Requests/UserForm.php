@@ -23,11 +23,22 @@ class UserForm extends FormRequest
 	 */
 	public function rules()
 	{
+		$this->sanitize();
+
 		return [
 			'username' => 'required|min:4|max:255',
-			'old_password' => 'required|min:5|max:255',
+			'old_password' => 'required|min:4|max:255',
 			'new_password' => 'required|min:5|max:255',
 		];
+	}
+
+	public function sanitize()
+	{
+		$input = $this->all();
+
+		$input['username'] = strtolower($input['username']);
+
+		$this->replace($input);
 	}
 
 	public function messages()

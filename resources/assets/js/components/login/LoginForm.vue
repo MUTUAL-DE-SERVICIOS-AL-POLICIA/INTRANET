@@ -1,11 +1,16 @@
 <template>
-	<v-container fluid fill-height id="background-page">
+	<v-container fluid fill-height id="background-page" @keydown.esc="$router.push({ name: 'serviceIndex' })">
     <v-layout row align-center justify-center>
       <v-flex d-flex xs12 sm6 md4>
         <v-card class="pa-5 ma-5">
+          <v-card-title primary-title>
+            <div>
+              <div class="headline">Ingresar</div>
+            </div>
+          </v-card-title>
           <v-form>
             <v-text-field
-              v-validate="'required|min:5|max:255'"
+              v-validate="'required|min:4|max:255'"
               @keyup.enter="focusPassword()"
               v-model="auth.username"
               prepend-icon="person"
@@ -17,7 +22,7 @@
               required
             ></v-text-field>
             <v-text-field
-              v-validate="'required|min:5|max:255'"
+              v-validate="'required|min:4|max:255'"
               @keyup.enter="authenticate(auth)"
               v-model="auth.password"
               prepend-icon="lock"

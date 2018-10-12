@@ -23,7 +23,7 @@ class UserController extends Controller
 	{
 		$ldap = new Ldap();
 
-		if ($ldap->connection) {
+		if ($ldap->connection && $ldap->verify_open_port()) {
 			if ($ldap->bind($request['username'], $request['old_password'])) {
 				if ($ldap->update_password($request['username'], $request['new_password'])) {
 					return response()->json([
@@ -35,9 +35,9 @@ class UserController extends Controller
 				return response()->json([
 					'message' => 'Unauthorized',
 					'errors' => [
-						'type' => ['Contraseña incorrecta'],
+						'type' => ['Usuario o contraseña incorrecta'],
 					]
-				], 401);
+				], 403);
 			}
 		}
 
