@@ -26,9 +26,7 @@ class AuthController extends Controller
 	 */
 	public function store(AuthForm $request)
 	{
-		$credentials = request(['username', 'password']);
-
-		$token = auth('api')->attempt($credentials);
+		$token = auth('api')->attempt(request(['username', 'password']));
 
 		if ($token) {
 			return $this->respondWithToken($token);
@@ -51,16 +49,6 @@ class AuthController extends Controller
 	 */
 	public function show()
 	{
-		if (config('app.debug')) {
-			$token = auth('api')->attempt([
-				'username' => 'admin',
-				'password' => 'admin',
-			]);
-
-			if ($token) {
-				return response()->json(auth('api')->user());
-			}
-		}
 		return response()->json(auth('api')->user());
 	}
 
@@ -84,16 +72,6 @@ class AuthController extends Controller
 	 */
 	public function update()
 	{
-		if (config('app.debug')) {
-			$token = auth('api')->attempt([
-				'username' => 'admin',
-				'password' => 'admin',
-			]);
-
-			if ($token) {
-				return $this->respondWithToken($token);
-			}
-		}
 		return $this->respondWithToken(auth('api')->refresh());
 	}
 
