@@ -63,8 +63,18 @@ class Ldap
 
       $new_password = array('userPassword' => "{SSHA}" . base64_encode(pack("H*", sha1($new_password . $salt)) . $salt));
 
-      return @ldap_mod_replace($this->connection, $this->config['user_id_key'] . '=' . $username . ',' . $this->config['account_suffix'], $new_password);
+      $update = @ldap_mod_replace($this->connection, $this->config['user_id_key'] . '=' . $username . ',' . $this->config['account_suffix'], $new_password);
+
+      $this->unbind();
+
+      return $update;
     }
     return false;
+  }
+
+  public function unbind()
+  {
+    @ldap_unbind($this->connection);
+    @ldap_close($this->connection);
   }
 }

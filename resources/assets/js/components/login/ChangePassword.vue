@@ -133,6 +133,7 @@ export default {
         }
       } catch (e) {
         this.cleanForm();
+        this.focusInput("old_password");
         console.log(e);
       }
     }
