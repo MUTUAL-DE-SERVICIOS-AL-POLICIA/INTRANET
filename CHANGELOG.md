@@ -2,6 +2,13 @@
 
 ---
 
+## [1.2.0](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.2.0) - 2018-10-12
+
+### Changed
+
+* Changed layout on services view index
+* Added option to change password on an LDAP server
+
 ## [1.1.2](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.1.2) - 2018-10-05
 
 ### Changed
