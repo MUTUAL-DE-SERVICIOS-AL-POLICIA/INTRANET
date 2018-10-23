@@ -1,4 +1,19 @@
 # MANUAL DE USUARIO ESCRITORIO VIRTUAL
+
+## ROL USUARIO
+
+1. CAMBIO DE CONTRASEÑA DE LDAP
+
+Para cambiar su contraseña en los sistemas internos de MUSERPOL debe hacer click en el botón CAMBIAR CONTRASEÑA ubicado en la barra superior.
+
+![login](./img/update_password_btn.png)
+
+En este formulario debe llenar los datos correspondientes a su usuario, su contraseña actual y posteriormente ingresar su nueva contraseña, con la confirmación de ésta última.
+
+![login](./img/update_password_form.png)
+
+## ROL ADMINISTRADOR
+
 1. INGRESO AL SISTEMA.
 Este sistema es compatible con los navegadores Firefox y Chrome, para acceder al sistema se debe acceder al enlace:
 [http:// intranet.muserpol.gob.bo](http://intranet.muserpol.gob.bo).

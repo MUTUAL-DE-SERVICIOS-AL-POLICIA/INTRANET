@@ -20,14 +20,14 @@ class Ldap
 
     $this->config['account_suffix'] = implode(',', [env("LDAP_ACCOUNT_SUFFIX"), $this->config['base_dn']]);
 
-    $this->config['ldap_url'] = 'ldap://' . $this->config['ldap_host'];
+    $this->config['ldap_url'] = $this->config['ldap_ssl'] ? 'ldaps://' : 'ldap://';
+    $this->config['ldap_url'] .= $this->config['ldap_host'];
+    $this->config['ldap_url'] = implode(':', [$this->config['ldap_url'], $this->config['ldap_port']]);
 
-    $this->connection = @ldap_connect($this->config['ldap_url'], $this->config['ldap_port']);
+    $this->connection = @ldap_connect($this->config['ldap_url']);
 
-    if ($this->config['ldap_ssl'] && $this->connection) {
-      ldap_set_option($this->connection, LDAP_OPT_PROTOCOL_VERSION, 3);
-      ldap_set_option($this->connection, LDAP_OPT_REFERRALS, 0);
-    }
+    ldap_set_option($this->connection, LDAP_OPT_PROTOCOL_VERSION, 3);
+    ldap_set_option($this->connection, LDAP_OPT_REFERRALS, 0);
   }
 
   public function verify_open_port()
