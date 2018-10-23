@@ -2,6 +2,12 @@
 
 ---
 
+## [1.2.1](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.2.1) - 2018-10-23
+
+### Fixed
+
+* LDAP connection to another port than 389
+
 ## [1.2.0](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.2.0) - 2018-10-12
 
 ### Changed

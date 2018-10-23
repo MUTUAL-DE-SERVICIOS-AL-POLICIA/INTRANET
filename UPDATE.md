@@ -2,6 +2,13 @@
 
 ---
 
+## From [1.2.0](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.2.0) to [1.2.1](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.2.1)
+
+```sh
+rm public/js/app.js
+yarn prod && php artisan view:clear && php artisan config:cache
+```
+
 ## From [1.1.2](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.1.2) to [1.2.0](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/PVA-EV/tree/1.2.0)
 
 * Remove cached files
