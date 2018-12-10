@@ -3,6 +3,8 @@ import LoginForm from './components/login/LoginForm'
 import ChangePassword from './components/login/ChangePassword'
 import IconIndex from './components/icon/IconIndex'
 import GroupIndex from './components/group/GroupIndex'
+import NoticeIndex from './components/notice/NoticeIndex'
+import UserIndex from './components/user/UserIndex'
 
 export const routes = [
   {
@@ -45,6 +47,20 @@ export const routes = [
     path: '/group',
     component: GroupIndex,
     name: 'groupIndex',
+    meta: {
+      requiresAuth: true
+    }
+  }, {
+    path: '/notice',
+    component: NoticeIndex,
+    name: 'noticeIndex',
+    meta: {
+      requiresAuth: true
+    }
+  }, { 
+    path: '/user',
+    component: UserIndex,
+    name: 'userIndex',
     meta: {
       requiresAuth: true
     }

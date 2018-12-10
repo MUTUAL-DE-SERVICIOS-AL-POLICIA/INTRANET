@@ -3,6 +3,7 @@
     <v-toolbar>
       <v-toolbar-title>{{ select.name }}</v-toolbar-title>
       <v-spacer></v-spacer>
+      <NoticeModal :bus="bus"/>
       <RemoveItem :bus="bus"/>
       <ServiceForm :bus="bus"/>
       <v-btn
@@ -14,23 +15,41 @@
       >
         Cambiar contraseña
       </v-btn>
+      <span v-if="$store.getters.currentUser">
       <v-btn
         color="tertiary"
         dark
         :to="{ name: 'iconIndex' }"
-        v-if="$store.getters.currentUser"
+        v-if="$store.getters.currentUser.roles[0].name == 'admin'"
       >
         Íconos
       </v-btn>
       <v-btn
         color="tertiary"
         dark
-        :to="{ name: 'groupIndex' }"
-        class="mr-5"
-        v-if="$store.getters.currentUser"
+        :to="{ name: 'groupIndex' }"        
+        v-if="$store.getters.currentUser.roles[0].name == 'admin'"
       >
         Grupos
       </v-btn>
+      <v-btn
+        color="tertiary"
+        dark
+        :to="{ name: 'userIndex' }"        
+        v-if="$store.getters.currentUser.roles[0].name == 'admin'"
+      >
+        Usuarios
+      </v-btn>
+      <v-btn
+        color="tertiary"
+        dark
+        class="mr-5"
+        :to="{ name: 'noticeIndex' }"
+        v-if="$store.getters.currentUser.roles[0].name == 'admin'||$store.getters.currentUser.roles[0].name == 'secretaria'"
+      >
+        Comunicados
+      </v-btn>
+      </span>
       <v-flex xs2>
         <v-select
           v-model="select"
@@ -102,12 +121,14 @@
 import Vue from "vue";
 import ServiceForm from "./ServiceForm";
 import RemoveItem from "../RemoveItem";
+import NoticeModal from "../notice/NoticeModal";
 
 export default {
   name: "ServiceIndex",
   components: {
     ServiceForm,
-    RemoveItem
+    RemoveItem,
+    NoticeModal
   },
   data() {
     return {
@@ -120,7 +141,8 @@ export default {
       services: [],
       selection: [],
       select: { id: 0, name: "APLICACIONES", shortened: "VER TODO" },
-      rightClickMenu: []
+      rightClickMenu: [],
+      notices: []
     };
   },
   mounted() {
@@ -129,6 +151,7 @@ export default {
     this.bus.$on("closeDialog", () => {
       this.getGroups();
     });
+    this.getNotices();
   },
   methods: {
     addNewService() {
@@ -248,6 +271,13 @@ export default {
     },
     newItem() {
       this.bus.$emit("openDialog");
+    },
+    async getNotices () {
+      let res = await axios.get(`/notice`);
+      this.notices = res.data.filter(e => e.active == true).sort();
+      if (this.notices.length != 0) {        
+        this.bus.$emit("openDialogModal", this.notices);
+      }      
     }
   }
 };

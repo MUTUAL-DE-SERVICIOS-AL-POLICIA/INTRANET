@@ -11,6 +11,9 @@ Route::group([
 	Route::get('icon/{id}', 'Api\V1\IconController@show')->name('icon_details');
 	Route::get('group/{id}', 'Api\V1\GroupController@show')->name('group_details');
 	Route::get('service/{id}', 'Api\V1\ServiceController@show')->name('service_details');
+	Route::get('notice_type', 'Api\V1\NoticeTypeController@index')->name('notice_type');
+	Route::get('notice', 'Api\V1\NoticeController@index')->name('notice');
+	Route::get('notice/{id}', 'Api\V1\NoticeController@show')->name('show');	
 	// Login
 	Route::post('auth', 'Api\V1\AuthController@store')->name('login');
 	Route::group([
@@ -28,6 +31,34 @@ Route::group([
 		Route::delete('service/{id}', 'Api\V1\ServiceController@destroy')->name('service_destroy');
 		Route::post('group', 'Api\V1\GroupController@store')->name('group_store');
 		Route::patch('group/{id}', 'Api\V1\GroupController@update')->name('group_update');
-		Route::delete('group/{id}', 'Api\V1\GroupController@destroy')->name('group_destroy');
+		Route::delete('group/{id}', 'Api\V1\GroupController@destroy')->name('group_destroy');		
+
+		Route::group([
+			'middleware' => 'role:admin',
+		], function () {
+			Route::get('user', 'Api\V1\UserController@index')->name('user');
+			Route::post('user', 'Api\V1\UserController@store')->name('user_store');
+			Route::resource('ldap', 'Api\V1\LdapController')->only(['index', 'store', 'show', 'update']);
+			Route::get('role', 'Api\V1\RoleController@index')->name('role');
+			Route::group([
+			'prefix' => 'user/{user_id}/role',
+			], function () {
+				Route::get('', 'Api\V1\UserRoleController@get_roles')->name('user_roles_list');
+				Route::group([
+					'prefix' => '/{role_id}',
+				], function () {
+					Route::get('', 'Api\V1\UserRoleController@get_role')->name('user_role_details');
+					Route::patch('', 'Api\V1\UserRoleController@set_role')->name('user_set_role');
+					Route::delete('', 'Api\V1\UserRoleController@unset_role')->name('user_unset_role');
+				});
+			});
+		});
+		Route::group([
+			'middleware' => 'role:admin|secretaria',
+		], function () {
+			Route::get('notice/print/{id}', 'Api\V1\NoticeController@print')->name('print_notice');
+			Route::get('notice/upload_image', 'Api\V1\NoticeController@upload_image')->name('upload_image');
+			Route::resource('notice', 'Api\V1\NoticeController')->only(['store', 'update', 'destroy']);
+		});
 	});
 });

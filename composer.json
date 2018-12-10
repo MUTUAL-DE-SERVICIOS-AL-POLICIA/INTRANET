@@ -10,13 +10,16 @@
     "require": {
         "php": "^7.1.22",
         "barryvdh/laravel-cors": "^v0.11.2",
+        "barryvdh/laravel-snappy": "v0.4.3",
         "fideloper/proxy": "^4.0.0",
         "laravel/framework": "^v5.7.6",
         "laravel/tinker": "^v1.0.7",
         "mpociot/laravel-apidoc-generator": "^2.1.5",
         "nesbot/carbon": "^1.34.0",
         "santigarcor/laratrust": "^5.0.9",
-        "tymon/jwt-auth": "^1.0.0-rc.3"
+        "tymon/jwt-auth": "^1.0.0-rc.3",
+        "h4cc/wkhtmltoimage-amd64": "0.12.4",
+        "h4cc/wkhtmltopdf-amd64": "0.12.4"
     },
     "require-dev": {
         "bea/composer/freeze-version": "dev-master",

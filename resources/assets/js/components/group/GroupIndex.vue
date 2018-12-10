@@ -6,18 +6,47 @@
         <v-btn
           color="tertiary"
           dark
+          :to="{ name: 'changePassword' }"
+          class="mr-5"
+          v-if="!$store.getters.currentUser"
+        >
+          Cambiar contraseña
+        </v-btn>
+        <span v-if="$store.getters.currentUser">
+        <v-btn
+          color="tertiary"
+          dark
           :to="{ name: 'iconIndex' }"
+          v-if="$store.getters.currentUser.roles[0].name == 'admin'"
         >
           Íconos
         </v-btn>
         <v-btn
           color="tertiary"
           dark
-          :to="{ name: 'serviceIndex' }"
-          class="mr-4"
+          :to="{ name: 'groupIndex' }"        
+          v-if="$store.getters.currentUser.roles[0].name == 'admin'"
         >
-          Servicios
+          Grupos
         </v-btn>
+        <v-btn
+          color="tertiary"
+          dark
+          :to="{ name: 'userIndex' }"        
+          v-if="$store.getters.currentUser.roles[0].name == 'admin'"
+        >
+          Usuarios
+        </v-btn>
+        <v-btn
+          color="tertiary"
+          dark
+          class="mr-5"
+          :to="{ name: 'noticeIndex' }"
+          v-if="$store.getters.currentUser.roles[0].name == 'admin'||$store.getters.currentUser.roles[0].name == 'secretaria'"
+        >
+          Comunicados
+        </v-btn>
+        </span>
         <v-divider
           class="mx-2"
           inset
