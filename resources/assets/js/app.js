@@ -18,6 +18,9 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import ess from './es.js'
 import Vuetify from 'vuetify'
 
+import 'vueditor/dist/style/vueditor.min.css'
+import print from 'print-js'
+
 Vue.use(Vuetify, {
   lang: {
     locales: { ess },

@@ -172,6 +172,9 @@ return [
 
 		// CORS
 		Barryvdh\Cors\ServiceProvider::class,
+
+		// Snappy
+		Barryvdh\Snappy\ServiceProvider::class,
 	],
 
 	/*
@@ -233,5 +236,9 @@ return [
 
 		// Carbon
 		'Carbon' => \Carbon\Carbon::class,
+
+		// Snappy
+		'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+		'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 	],
 ];

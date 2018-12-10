@@ -14,6 +14,9 @@ class Ldap
       'ldap_port' => env("LDAP_PORT"),
       'ldap_ssl' => env("LDAP_SSL"),
       'user_id_key' => env("LDAP_ACCOUNT_PREFIX"),
+      'admin_id_key' => env("LDAP_ADMIN_PREFIX"),
+      'admin_username' => env("LDAP_ADMIN_USERNAME"),
+      'admin_password' => env("LDAP_ADMIN_PASSWORD"),
       'base_dn' => env("LDAP_BASEDN"),
       'timeout' => env("LDAP_TIMEOUT")
     );
@@ -76,5 +79,86 @@ class Ldap
   {
     @ldap_unbind($this->connection);
     @ldap_close($this->connection);
+  }
+
+  public function list_entries()
+  { 
+    if ($this->connection && $this->verify_open_port()) {      
+      if ($this->bind_admin()) {
+        $search = ldap_search($this->connection, $this->config['account_suffix'], "(|(" . $this->config['user_id_key'] . "=*))", array($this->config['user_id_key'], "title", "givenName", "cn", "sn", "mail", "employeenumber"));
+        $entries = ldap_get_entries($this->connection, $search);
+
+        $result = [];
+
+        foreach ($entries as $key => $value) {
+          if ($value[$this->config['user_id_key']]) {
+            $result[] = (object)[
+              $this->config['user_id_key'] => $value[$this->config['user_id_key']][0],
+              'givenName' => $value['givenname'][0],
+              'employeeNumber' => (int)$value['employeenumber'][0],
+              'sn' => $value['sn'][0],
+              'cn' => $value['cn'][0],
+              'title' => $value['title'][0],
+              'dn' => $value['dn'],
+              'mail' => $value['mail'][0],
+            ];
+          }
+        }
+
+        return $result;
+      }
+    }
+    abort(500);
+  }
+  
+  public function bind_admin()
+  {
+    if ($this->connection) {
+      return @ldap_bind($this->connection, $this->config['admin_id_key'] . '=' . $this->config['admin_username'] . ',' . $this->config['base_dn'], $this->config['admin_password']);
+    }
+    return false;
+  }
+
+  public function get_entry($id, $type = 'id')
+  {
+    switch ($type) {
+      case 'id':
+        $identifier = 'employeeNumber';
+        break;
+      case 'uid':
+        $identifier = 'uid';
+        break;
+      default:
+        return null;
+    }
+
+    if ($this->connection && $this->verify_open_port()) {
+      if ($this->bind_admin()) {
+        $search = ldap_search($this->connection, $this->config['account_suffix'], "(|(" . $identifier . "=" . $id . "))", array($this->config['user_id_key'], "title", "givenName", "cn", "sn", "mail", "employeeNumber"));
+        $entries = ldap_get_entries($this->connection, $search);
+        $result = [];
+
+        foreach ($entries as $key => $value) {
+          if ($value[$this->config['user_id_key']]) {
+            $result[] = [
+              $this->config['user_id_key'] => $value[$this->config['user_id_key']][0],
+              'employeeNumber' => (int)$value['employeenumber'][0],
+              'givenName' => $value['givenname'][0],
+              'sn' => $value['sn'][0],
+              'cn' => $value['cn'][0],
+              'title' => $value['title'][0],
+              'dn' => $value['dn'],
+              'mail' => $value['mail'][0],
+            ];
+          }
+        }
+
+        if (count($result) == 1) {
+          return $result[0];
+        } else {
+          return null;
+        }
+      }
+    }
   }
 }

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserForm;
+use App\User;
 use Ldap;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 /** @resource User
  *
@@ -13,6 +16,43 @@ use Ldap;
 
 class UserController extends Controller
 {
+	/**
+	 * Display User's data.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	{
+		return User::where('active', true)->with('roles')->orderBy('username')->get();
+	}
+
+	/**
+	 * Stores a user.
+	 *
+	 * @param  \App\Employee  $employee
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		
+		if (!env("LDAP_AUTHENTICATION")) {
+			abort(409);
+		} else {
+			$ldap = new Ldap();
+			$user = new User();
+			$entry = $ldap->get_entry(request("employee_id"));
+			$username = $entry['uid'];
+
+			if ($username) {
+				$user->username = $username;
+				$user->password = Hash::make($username);
+				$user->save();
+				return $user;
+			}
+			abort(409);
+		}
+	}
+
 	/**
 	 * Update the specified user in storage.
 	 *
