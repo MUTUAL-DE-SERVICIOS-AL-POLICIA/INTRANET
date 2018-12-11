@@ -4,7 +4,7 @@
 		<style type="text/css">
 			.foot{
 				text-align: center;
-				font-size: 15pt;
+				font-size: 14pt;
 			}
 			.nomargin{
 				margin: 0;
