@@ -197,7 +197,6 @@ export default {
     },
     async switchActive(notice) {
       try {
-        console.log(notice.active);
         let res = await axios.patch(`/notice/${notice.id}`, {
           active: notice.active
         });

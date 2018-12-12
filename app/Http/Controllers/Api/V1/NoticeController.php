@@ -95,7 +95,7 @@ class NoticeController extends Controller
     function print($id) {
         $pageWidth   = '216';
         $pageHeight  = '279';
-        $pageMargins = [20, 10, 20, 15];
+        $pageMargins = [25, 10, 20, 15];
         $pageName    = 'Comunicado.pdf';
         $headerHtml  = view()->make('partials.head')->render();
         $footerHtml  = view()->make('partials.foot')->render();
@@ -113,26 +113,5 @@ class NoticeController extends Controller
             ->setOption('margin-left', $pageMargins[3])
             ->setOption('encoding', 'utf-8')
             ->stream($pageName);
-    }
-
-    public function upload_image()
-    {
-        // $ds = DIRECTORY_SEPARATOR; //1
-
-        // $storeFolder = 'uploads'; //2
-
-        // if (!empty($_FILES)) {
-
-        //     $tempFile = $_FILES['file']['tmp_name']; //3
-
-        //     $targetPath = dirname(__FILE__) . $ds . $storeFolder . $ds; //4
-
-        //     $targetFile = $targetPath . $_FILES['file']['name']; //5
-
-        //     move_uploaded_file($tempFile, $targetFile); //6
-
-        // }
-
-        return "hoola";
     }
 }
