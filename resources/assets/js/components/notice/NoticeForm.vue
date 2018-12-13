@@ -128,7 +128,7 @@ export default {
         if (valid) {
           this.selectedItem.content = this.$refs.editor.getContent()
           if (this.selectedIndex != -1) {
-            let res = await axios.patch("/notice/" + this.selectedItem.id, this.selectedItem);
+            let res = await axios.patch(`/notice/${this.selectedItem.id}`, this.selectedItem);
             this.close();
             this.toastr.success("Editado correctamente");
           } else {
