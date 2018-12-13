@@ -53,9 +53,6 @@ export default {
       this.notices = item;
       this.dialog = true;
       this.alt = this.alt - (50 * item.length);
-      setInterval(() => {
-        this.changeItem(item.length-1);
-      }, 5000);      
     });
   }
 };
