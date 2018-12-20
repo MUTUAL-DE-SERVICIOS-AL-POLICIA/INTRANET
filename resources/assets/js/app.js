@@ -116,3 +116,4 @@ new Vue({
   },
   locale: 'es',
 })
+const DELIVERY = "Delivery"

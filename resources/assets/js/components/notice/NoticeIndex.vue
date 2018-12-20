@@ -207,15 +207,19 @@ export default {
     },
     async printItem(item) {
       try {
-        let res = await axios({
-          method: "GET",
-          url: `/notice/print/${item.id}`,
-          responseType: "arraybuffer"
-        });
-        let blob = new Blob([res.data], {
-          type: "application/pdf"
-        });
-        printJS(window.URL.createObjectURL(blob));
+        if (item.url_document) {
+          printJS("uploads/COM12018");
+        } else {
+          let res = await axios({
+            method: "GET",
+            url: `/notice/print/${item.id}`,
+            responseType: "arraybuffer"
+          });
+          let blob = new Blob([res.data], {
+            type: "application/pdf"
+          });
+          printJS(window.URL.createObjectURL(blob));
+        }
       } catch (e) {
         console.log(e);
       }
