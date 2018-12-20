@@ -13,7 +13,9 @@ Route::group([
 	Route::get('service/{id}', 'Api\V1\ServiceController@show')->name('service_details');
 	Route::get('notice_type', 'Api\V1\NoticeTypeController@index')->name('notice_type');
 	Route::get('notice', 'Api\V1\NoticeController@index')->name('notice');
-	Route::get('notice/{id}', 'Api\V1\NoticeController@show')->name('show');	
+	Route::get('notice/{id}', 'Api\V1\NoticeController@show')->name('show');
+	Route::get('notice/print/{id}', 'Api\V1\NoticeController@print')->name('print_notice');
+	Route::resource('notice', 'Api\V1\NoticeController')->only(['store','update']);
 	// Login
 	Route::post('auth', 'Api\V1\AuthController@store')->name('login');
 	Route::group([
@@ -36,6 +38,7 @@ Route::group([
 		Route::group([
 			'middleware' => 'role:admin',
 		], function () {
+
 			Route::get('user', 'Api\V1\UserController@index')->name('user');
 			Route::post('user', 'Api\V1\UserController@store')->name('user_store');
 			Route::resource('ldap', 'Api\V1\LdapController')->only(['index', 'store', 'show', 'update']);
@@ -56,9 +59,7 @@ Route::group([
 		Route::group([
 			'middleware' => 'role:admin|secretaria',
 		], function () {
-			Route::get('notice/print/{id}', 'Api\V1\NoticeController@print')->name('print_notice');
-			Route::get('notice/upload_image', 'Api\V1\NoticeController@upload_image')->name('upload_image');
-			Route::resource('notice', 'Api\V1\NoticeController')->only(['store', 'update', 'destroy']);
+			
 		});
 	});
 });

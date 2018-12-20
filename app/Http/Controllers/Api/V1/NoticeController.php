@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Notice;
+use App\NoticeType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 
 class NoticeController extends Controller
 {
@@ -36,15 +40,24 @@ class NoticeController extends Controller
                 $notice = 1;
             }
         }
+
+        $notice_type = NoticeType::find($request->notice_type_id);
+
         $notice                 = new Notice;
         $notice->notice_type_id = $request->notice_type_id;
         $notice->origin         = $request->origin;
         $notice->title          = $request->title;
-        $notice->content        = $request->title;
+        $notice->content        = $request->content;
         $notice->correlative    = $correlative;
         $notice->year           = $year;
+        $file = $request->file;
+        if ($file != 'null') {            
+            if (Storage::disk('uploads')->put('/'.$notice_type->shortened.$notice->correlative.$notice->year,  File::get($file))) {
+                $notice->url_document = 'uploads/'.$notice_type->shortened.$notice->correlative.$notice->year;
+            }
+        }
         $notice->save();
-        return $notice;
+        return $request->file;
     }
 
     /**
