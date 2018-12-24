@@ -58,3 +58,12 @@ Una vez en la dirección debe hacer click en el boton ingresar en la parte infer
 * Para las opciones de nuevo y editar muestra el siguiente formulario:
 
 ![form](./img/form_group.png)
+
+5. GESTION DE COMUNICADOS. Vista administrable de comunicados con las opciones de nuevo, editar y eliminar grupo.
+
+![list](./img/notices.png)
+
+* Para las opciones de nuevo y editar muestra el siguiente formulario:
+
+![form](./img/notice_form.png)
+* Cuando se activa un cominucado este se mostrará en el inicio del sistema INTRANTET
