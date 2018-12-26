@@ -6,6 +6,16 @@
       <NoticeModal :bus="bus"/>
       <RemoveItem :bus="bus"/>
       <ServiceForm :bus="bus"/>
+      <PhonebookModal :bus="bus"/>
+      <v-btn
+        color="tertiary"
+        dark
+        @click="bus.$emit('openDialogPhonebook')"
+        class="mr-5"
+        v-if="!$store.getters.currentUser"
+      >
+        Agenda telefonica
+      </v-btn>
       <v-btn
         color="tertiary"
         dark
@@ -122,13 +132,15 @@ import Vue from "vue";
 import ServiceForm from "./ServiceForm";
 import RemoveItem from "../RemoveItem";
 import NoticeModal from "../notice/NoticeModal";
+import PhonebookModal from "../phonebook/PhonebookModal";
 
 export default {
   name: "ServiceIndex",
   components: {
     ServiceForm,
     RemoveItem,
-    NoticeModal
+    NoticeModal,
+    PhonebookModal
   },
   data() {
     return {

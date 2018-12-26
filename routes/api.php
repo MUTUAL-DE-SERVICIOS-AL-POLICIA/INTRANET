@@ -16,6 +16,8 @@ Route::group([
 	Route::get('notice/{id}', 'Api\V1\NoticeController@show')->name('show');
 	Route::get('notice/print/{id}', 'Api\V1\NoticeController@print')->name('print_notice');
 	Route::resource('notice', 'Api\V1\NoticeController')->only(['store','update']);
+	Route::get('phonebook/print', 'Api\V1\PhonebookController@print')->name('print_phonebook');
+	Route::resource('phonebook', 'Api\V1\PhonebookController')->only(['index']);
 	// Login
 	Route::post('auth', 'Api\V1\AuthController@store')->name('login');
 	Route::group([
