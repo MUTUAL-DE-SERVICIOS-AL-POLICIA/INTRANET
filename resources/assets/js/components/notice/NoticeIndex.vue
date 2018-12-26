@@ -136,7 +136,7 @@ export default {
     bus: new Vue(),
     headers: [
       {
-        text: "Typo",
+        text: "Tipo",
         value: "notice_type.name",
         align: "center"
       }, {
