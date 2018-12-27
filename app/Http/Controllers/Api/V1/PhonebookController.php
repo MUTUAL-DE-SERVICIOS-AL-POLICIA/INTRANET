@@ -14,7 +14,7 @@ class PhonebookController extends Controller
     public function index()
     {
         $path = env("APP_URL_RRHH");
-        $notice = file_get_contents($path . '/api/v1/location');
+        $notice = file_get_contents($path . '/api/v1/location/list');
         return json_decode($notice);
     }    
 
@@ -33,7 +33,7 @@ class PhonebookController extends Controller
         $headerHtml  = view()->make('partials.head')->render();
         $footerHtml  = view()->make('partials.foot')->render();
         $data = [
-            'position_groups' => json_decode(file_get_contents($path . '/api/v1/location/position_group'))
+            'position_groups' => json_decode(file_get_contents($path . '/api/v1/location'))
         ];
         return \PDF::loadView('phonebook.print', $data)
             ->setOption('header-html', $headerHtml)

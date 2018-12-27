@@ -2,7 +2,7 @@
   <v-dialog scrollable persistent v-model="dialog" max-width="900px" @keydown.esc="dialog = false">
       <v-card>
         <v-toolbar dark color="primary">
-          Agenda Telefonica
+          <v-toolbar-title>NÚMEROS DE TELÉFONOS INTERNOS</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon dark @click="dialog = false">
             <v-icon>close</v-icon>
