@@ -15,9 +15,10 @@
 	                </th>
 	                <th class="w-50 align-top">
 	                    <span class="font-semibold uppercase leading-tight text-md" >
-	                        {{ '' }} <br>
-	                        {{ 'MUTUAL DE SERVICIOS AL POLICÍA "MUSERPOL"' }} <br>
-	                       
+	                       {{ '' }} <br>
+	                       {{ 'MUTUAL DE SERVICIOS AL POLICÍA "MUSERPOL"' }} <br>
+	                       {{ $direction }} <br>
+	                       {{ $unidad }} <br>
 	                    </span>
 	                </th>
 	                <th class="w-20 no-padding no-margins align-top">

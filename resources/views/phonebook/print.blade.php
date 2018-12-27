@@ -7,7 +7,8 @@
 </head>
 <body style="border: 0;border-radius: 0;">    
     <div class="block">
-        <div class="font-semibold leading-tight text-md text-center">NÚMEROS DE TELÉFONOS INTERNOS</div>
+        <div class="font-semibold leading-tight text-md text-center m-b-10">NÚMEROS DE TELÉFONOS INTERNOS</div>
+
         <table class="table-info w-100 m-b-10">
             <thead class="bg-grey-darker">
                 <tr class="font-medium text-white text-xs uppercase">

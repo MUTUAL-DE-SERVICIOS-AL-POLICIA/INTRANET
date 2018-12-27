@@ -30,7 +30,11 @@ class PhonebookController extends Controller
         $pageHeight  = '279';
         $pageMargins = [25, 10, 20, 15];
         $pageName    = 'Telefonos internos.pdf';
-        $headerHtml  = view()->make('partials.head')->render();
+        $head = [
+            'direction' => 'Dirección de Asuntos Administrativos',
+            'unidad' => 'Unidad de sistemas',
+        ];
+        $headerHtml  = view()->make('partials.head', $head)->render();
         $footerHtml  = view()->make('partials.foot')->render();
         $data = [
             'position_groups' => json_decode(file_get_contents($path . '/api/v1/location'))
