@@ -14,7 +14,7 @@
         class="mr-5"
         v-if="!$store.getters.currentUser"
       >
-        Agenda telefonica
+        <v-icon>contact_phone</v-icon> &nbsp;&nbsp;Agenda telefonica
       </v-btn>
       <v-btn
         color="tertiary"
@@ -23,7 +23,7 @@
         class="mr-5"
         v-if="!$store.getters.currentUser"
       >
-        Cambiar contraseña
+        <v-icon>lock_open</v-icon> &nbsp;&nbsp;Cambiar contraseña
       </v-btn>
       <span v-if="$store.getters.currentUser">
       <v-btn
