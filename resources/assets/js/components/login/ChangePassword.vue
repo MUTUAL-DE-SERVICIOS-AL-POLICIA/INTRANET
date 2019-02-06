@@ -67,14 +67,14 @@
                 large
                 block
                 color="error"
-              > Volver </v-btn>
+              >Volver</v-btn>
               <v-btn
                 @click="changePassword()"
                 primary
                 large
                 block
                 color="success"
-              > Cambiar Contraseña </v-btn>
+              >Guardar</v-btn>
             </v-card-actions>
           </v-form>
         </v-card>
