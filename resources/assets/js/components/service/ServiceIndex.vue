@@ -163,7 +163,7 @@ export default {
     this.bus.$on("closeDialog", () => {
       this.getGroups();
     });
-    this.getNotices();
+    // this.getNotices();
   },
   methods: {
     addNewService() {
