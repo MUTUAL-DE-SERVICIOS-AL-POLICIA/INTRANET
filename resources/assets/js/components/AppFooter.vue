@@ -9,7 +9,7 @@
       </span>
     </v-btn>
     <v-spacer></v-spacer>
-    <span class="font-weight-thin caption pr-3">MUSERPOL <span class="copyleft">&copy;</span> - {{ now()->year }}</span>
+    <span class="font-weight-thin caption pr-3">MUSERPOL <span class="copyleft">&copy;</span> - 2021</span>
   </v-footer>
 </template>
 
