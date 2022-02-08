@@ -1,0 +1,65 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  
+  notification:
+    name: IM Notification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Notify to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.NOTIFY_CHAT }}
+          token: ${{ secrets.NOTIFY_SIGNKEY }}
+          message: |
+            ${{ github.actor }} hizo un push a master/main:
+            Mensaje: 
+            ${{ github.event.commits[0].message }}
+            _______________________________________
+            Repositorio: ${{ github.repository }}
+        
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }},${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+
+      -
+        name: Update repo description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
+          short-description: ${{ github.event.repository.description }}
+
+      -
+        name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
