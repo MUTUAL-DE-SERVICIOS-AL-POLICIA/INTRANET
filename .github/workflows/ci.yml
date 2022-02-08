@@ -55,7 +55,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags:  ${{ secrets.DOCKER_USERNAME }}/$REPO_LC:${{ github.sha }},${{ secrets.DOCKER_USERNAME }}/$REPO_LC:latest
+          tags:  ${{ secrets.DOCKER_USERNAME }}/${{env.REPO_LC}}:${{ github.sha }},${{ secrets.DOCKER_USERNAME }}/${{env.REPO_LC}}:latest
 
       -
         name: Update repo description
