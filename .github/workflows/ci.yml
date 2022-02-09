@@ -8,7 +8,7 @@ on:
 jobs:
   
   notification:
-    name: IM Notification
+    name: Notificación Telegram
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,11 +26,23 @@ jobs:
             Repositorio: ${{ github.repository }}
         
   docker:
+    name: Despliegue Docker
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout
         uses: actions/checkout@v2
+      
+      - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Dependencias de composer
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      - name: Instalacion de yarn
+        run: yarn
+      - name: Generacion de key
+        run: yes|php artisan key:generate
+      - name: Despliegue de yarn en producción
+        run: yarn prod
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
