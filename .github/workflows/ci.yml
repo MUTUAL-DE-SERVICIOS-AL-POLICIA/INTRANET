@@ -40,7 +40,7 @@ jobs:
       - name: Instalacion de yarn
         run: yarn
       - name: Generacion de key
-        run: yes|php artisan key:generate
+        run: php artisan key:generate
       - name: Despliegue de yarn en producción
         run: yarn prod
       -
