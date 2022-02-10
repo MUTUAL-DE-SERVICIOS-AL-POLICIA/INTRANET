@@ -1,3 +1,4 @@
+![example workflow](https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/INTRANET/actions/workflows/ci/badge.svg)
 # PLATAFORMA VIRTUAL ADMINISTRATIVA - ESCRITORIO VIRTUAL
 
 Escritorio virtual para albergar las aplicaciones y sistemas en producción de la institución.
