@@ -55,9 +55,8 @@ jobs:
       
       - name: Despliegue de yarn en producción
         run: yarn prod
-
-
  deploy:
+    name: Deploy
     needs: [build] # The below only runs if the build is succesful
     runs-on: ubuntu-latest
     steps:
