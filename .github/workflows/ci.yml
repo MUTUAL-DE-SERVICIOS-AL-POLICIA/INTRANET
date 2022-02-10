@@ -56,7 +56,6 @@ jobs:
         run: yarn prod
  deploy:
     name: Deploy
-    needs: [build] # The below only runs if the build is succesful
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
