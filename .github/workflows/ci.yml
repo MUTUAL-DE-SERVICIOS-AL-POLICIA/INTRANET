@@ -25,7 +25,7 @@ jobs:
             Repositorio: ${{ github.repository }}
         
   build:
-    needs: [NotificaciónTelegram] # The below only runs if the build is succesful
+    needs: [notification] # The below only runs if the build is succesful
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
