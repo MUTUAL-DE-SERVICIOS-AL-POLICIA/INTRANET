@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v1
       
       - name: Copy .env
-        run: cp .env.example .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       - name: Dependencias de composer
         run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --ignore-platform-reqs
@@ -42,8 +42,6 @@ jobs:
       - name: Instalacion de yarn
         run: yarn
 
-      - name: Generacion de key
-        run: php artisan key:generate
 
       - name: Despliegue de yarn en producción
         run: yarn prod
