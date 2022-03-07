@@ -24,38 +24,9 @@ jobs:
             _______________________________________
             Repositorio: ${{ github.repository }}
         
-  build:
-    needs: [notification] # The below only runs if the build is succesful
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '7.4'
-
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
-      - name: Dependencias de composer
-        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --ignore-platform-reqs
-
-      - name: Instalacion de yarn
-        run: yarn
-      
-      - name: Generate key
-        run: php artisan key:generate
-      
-      - name: Change Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
-      
-      - name: Despliegue de yarn en producción
-        run: yarn prod
-
+  
   deploy:
-    needs: [build] # The below only runs if the build is succesful
+    needs: [notification] # The below only runs if the build is succesful
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
