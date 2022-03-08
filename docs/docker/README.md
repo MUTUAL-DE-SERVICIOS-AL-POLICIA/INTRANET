@@ -16,6 +16,5 @@ copy .env
 * Modify `.env` file with desired data
 
 ```sh
-yes|php artisan key:generate
 service nginx restart
 ```

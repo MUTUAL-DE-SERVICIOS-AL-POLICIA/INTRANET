@@ -26,7 +26,7 @@ jobs:
         
   
   deploy:
-    needs: [notification] # The below only runs if the build is succesful
+    needs: [notification] 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
