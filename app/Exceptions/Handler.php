@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
@@ -87,6 +88,11 @@ class Handler extends ExceptionHandler
 					'type' => ['No autorizado'],
 				]
 			], 403);
+		} elseif ($exception instanceof ValidationException) {
+			return response()->json([
+				'message' => 'Validation error',
+				'errors' => $exception->validator->errors()
+			], 422);
 		} else {
 			LOG::error('Error inesperado: ' . $exception);
 		}
