@@ -128,6 +128,7 @@ export default {
               second: ""
             };
             this.focusInput("new_first_password");
+            this.toastr.error(res.data.errors.new_password);
             this.toastr.error("Las contraseñas no coinciden");
           }
         }
