@@ -36,7 +36,7 @@ class UserForm extends FormRequest
 				'regex:/[A-Z]/',
 				'regex:/[0-9]/',
 				'regex:/[@$!%*?&]/',
-				'not_regex:/password|1234567|abcd|qwerty/',
+				'not_regex:/password|12345678|abcd|qwerty/',
 			],
 		];
 	}
